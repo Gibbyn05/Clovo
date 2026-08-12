@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: "Clovo | Salgsdashboard bygget for teamet deres",
   description:
     "Vi bygger et salgsdashboard rundt teamet deres, og dere kan tilpasse det videre når arbeidsflyten endrer seg.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {

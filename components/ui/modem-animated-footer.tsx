@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -87,9 +88,7 @@ export function Footer({
               href="/"
               className="group flex items-center gap-2 text-3xl font-bold tracking-[-0.04em] text-[#1b1b1d]"
             >
-              <span className="grid size-9 place-items-center rounded-xl bg-[#ff5b35] text-base font-extrabold text-white shadow-[0_8px_22px_rgba(255,91,53,0.24)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105">
-                C
-              </span>
+              <Image src="/clovo-logo.png" alt="" width={36} height={36} className="size-9 rounded-xl shadow-[0_8px_22px_rgba(255,91,53,0.24)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105" />
               {brandName}
             </Link>
 
@@ -168,8 +167,8 @@ export function Footer({
           )}
           style={{ transitionDelay: "300ms" }}
         >
-          <div className="grid size-16 place-items-center rounded-2xl bg-gradient-to-br from-[#ff7352] to-[#e94825] text-3xl font-extrabold text-white shadow-[0_12px_26px_rgba(255,91,53,0.28)] transition-transform duration-500 hover:rotate-6 hover:scale-105 md:size-24 md:text-5xl">
-            {brandIcon || "C"}
+          <div className="grid size-16 place-items-center overflow-hidden rounded-2xl shadow-[0_12px_26px_rgba(255,91,53,0.28)] transition-transform duration-500 hover:rotate-6 hover:scale-105 md:size-24">
+            {brandIcon || <Image src="/clovo-logo.png" alt="" width={96} height={96} className="size-full" />}
           </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Menu, X } from "lucide-react";
 import styles from "./slide-tabs-navigation.module.css";
 
@@ -51,7 +52,7 @@ export function SlideTabsNavigation() {
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Hovednavigasjon">
         <Link href="/" className={styles.logo} aria-label="Clovo forside">
-          <i>C</i><b>Clovo</b>
+          <Image src="/clovo-logo.png" alt="" width={38} height={38} priority /><b>Clovo</b>
         </Link>
 
         <div

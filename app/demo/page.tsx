@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, BarChart3, Check, LockKeyhole } from "lucide-react";
 import { DemoForm } from "./demo-form";
 import styles from "./demo.module.css";
@@ -16,7 +17,7 @@ export default function DemoPage({
   return (
     <main className={styles.page}>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.logo}><i>C</i><b>Clovo</b></Link>
+        <Link href="/" className={styles.logo}><Image src="/clovo-logo.png" alt="" width={38} height={38} priority /><b>Clovo</b></Link>
         <Link href="/" className={styles.back}><ArrowLeft /> Tilbake til forsiden</Link>
       </nav>
 
