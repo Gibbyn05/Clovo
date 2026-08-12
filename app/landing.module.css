@@ -55,3 +55,12 @@
 /* Keep the compact insight card in the otherwise unused space below the team card. */
 .smartGrid .insight{grid-column:3}
 @media(max-width:800px){.smartGrid .insight{grid-column:auto}}
+
+/* Continuous logo-cloud marquee with the same masked-edge treatment as the reference. */
+.trusted .trustedViewport{display:block;overflow:hidden;margin-top:25px;mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent)}
+.trusted .trustedTrack{display:flex;width:max-content;margin:0;animation:trustedMarquee 22s linear infinite;will-change:transform}
+.trusted .trustedViewport:hover .trustedTrack{animation-play-state:paused}
+.trusted .trustedGroup{display:flex;flex:none;align-items:center;justify-content:space-around;width:min(1240px,calc(100vw - 48px));margin:0}
+@keyframes trustedMarquee{to{transform:translateX(-50%)}}
+@media(max-width:800px){.trusted .trustedGroup{width:calc(100vw - 32px);gap:48px;justify-content:flex-start}.trusted .trustedTrack{animation-duration:17s}}
+@media(prefers-reduced-motion:reduce){.trusted .trustedTrack{animation:none;transform:none}.trusted .trustedGroup[aria-hidden="true"]{display:none}.trusted .trustedGroup{flex-wrap:wrap;justify-content:center;gap:22px}}

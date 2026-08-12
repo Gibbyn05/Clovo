@@ -43,7 +43,7 @@ export default function Home() {
 
     <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><h1><SlideUpText lines={[{ text: "Få kontroll på" }, { text: "hele salgsarbeidet", emphasized: true }]} /></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="#funksjoner">Se hvordan</a></div></div><div className={styles.heroVisual}><div className={styles.courseTop}><b>Pipeline</b><span>Se alle</span></div><MiniTable/><div className={styles.floating}><small>Aktiv pipeline</small><b>925 400 kr</b><div><span>18 avtaler</span><span className={styles.orange}>+12%</span></div></div></div></section>
 
-    <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div></section>
+    <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div className={styles.trustedViewport}><div className={styles.trustedTrack}>{[false,true].map(copy=><div className={styles.trustedGroup} aria-hidden={copy || undefined} key={String(copy)}><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div>)}</div></div></section>
 
     <Features />
 
