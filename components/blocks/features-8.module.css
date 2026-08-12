@@ -81,3 +81,95 @@
     gap: 6px;
   }
 }
+
+.contractVisual button {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  min-height: 34px;
+  margin-top: 13px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 0;
+  border-radius: 5px;
+  background: #ff5b35;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  pointer-events: auto;
+  touch-action: manipulation;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 140ms cubic-bezier(.23, 1, .32, 1);
+}
+
+.contractVisual button svg {
+  width: 12px;
+  height: 12px;
+}
+
+.contractVisual button:hover:not(:disabled) {
+  background: #ef4d2a;
+  box-shadow: 0 8px 18px rgb(255 91 53 / 22%);
+}
+
+.contractVisual button:active:not(:disabled) {
+  transform: scale(.975);
+}
+
+.contractVisual button:disabled {
+  cursor: default;
+}
+
+.contractVisual[data-state="sent"] button {
+  background: #16865f;
+}
+
+.contractVisual[data-state="sent"] small {
+  color: #16865f;
+}
+
+.sendSpinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgb(255 255 255 / 42%);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: feature-send-spin 600ms linear infinite;
+}
+
+.sendCheck {
+  display: grid;
+  width: 15px;
+  height: 15px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 18%);
+  animation: feature-check-in 240ms cubic-bezier(.23, 1, .32, 1) both;
+}
+
+.sendCheck svg {
+  width: 10px;
+  height: 10px;
+  stroke-width: 3;
+}
+
+@keyframes feature-send-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes feature-check-in {
+  from { opacity: 0; transform: scale(.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contractVisual button,
+  .sendSpinner,
+  .sendCheck {
+    animation: none;
+    transition: none;
+  }
+}

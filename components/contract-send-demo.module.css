@@ -1,7 +1,11 @@
 .contractDemo button {
+  position: relative;
+  z-index: 2;
   min-height: 38px;
   cursor: pointer;
   overflow: hidden;
+  pointer-events: auto;
+  touch-action: manipulation;
   transition: background-color 180ms ease, box-shadow 180ms ease, transform 140ms cubic-bezier(.23, 1, .32, 1);
 }
 

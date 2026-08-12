@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Check, Send } from "lucide-react";
 import styles from "./features-8.module.css";
 
 type FeatureIcon = "dashboard" | "pipeline" | "roles" | "contract" | "insight" | "isolation";
@@ -17,6 +18,33 @@ function FeatureIcon({ name }: { name: FeatureIcon }) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 }
 
+function ContractVisual() {
+  const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  function simulateSend() {
+    if (state !== "idle") return;
+    setState("sending");
+    timers.current.push(
+      setTimeout(() => setState("sent"), 700),
+      setTimeout(() => setState("idle"), 3300),
+    );
+  }
+
+  return (
+    <div className={styles.contractVisual} data-state={state}>
+      <div><span>Avtale_Nordic.pdf</span><small>{state === "sent" ? "Klar for mottaker" : "Klar for signering"}</small></div>
+      <button type="button" onClick={simulateSend} disabled={state !== "idle"} aria-live="polite">
+        {state === "idle" && <><span>Send avtale</span><Send aria-hidden="true" /></>}
+        {state === "sending" && <><i className={styles.sendSpinner} aria-hidden="true" /><span>Sender...</span></>}
+        {state === "sent" && <><i className={styles.sendCheck} aria-hidden="true"><Check /></i><span>Mail er sendt!</span></>}
+      </button>
+    </div>
+  );
+}
+
 const features = [
   { icon: "dashboard" as const, title: "Dashboard bygget for dere", copy: "Sider, widgets og nøkkeltall settes sammen rundt teamets faktiske arbeidsdag.", kind: "dashboard" },
   { icon: "pipeline" as const, title: "Deres egen salgsprosess", copy: "Steg, sannsynlighet og neste aktivitet følger måten dere selger på.", kind: "pipeline" },
@@ -30,7 +58,7 @@ function Visual({ kind }: { kind: string }) {
   if (kind === "dashboard") return <div className={styles.dashboardVisual}><div className={styles.sideRail}><i/><i/><i/><i/></div><div className={styles.dashboardBody}><div className={styles.metricTiles}><span><small>Pipeline</small><b>925k</b></span><span><small>Mål</small><b>82%</b></span></div><div className={styles.chartBars}>{[42,68,53,86,62,96].map((height,index)=><i key={index} style={{height:`${height}%`}}/>)}</div></div></div>;
   if (kind === "pipeline") return <div className={styles.pipelineVisual}>{["Nytt lead","Møte","Tilbud","Vunnet"].map((step,index)=><span key={step}><i>{index+1}</i><b>{step}</b><em>{[12,8,5,3][index]}</em></span>)}</div>;
   if (kind === "roles") return <div className={styles.rolesVisual}>{[["S","Selger","Egne salg"],["L","Salgsleder","Teamoversikt"],["A","Admin","Full tilgang"]].map(row=><span key={row[1]}><i>{row[0]}</i><b>{row[1]}</b><small>{row[2]}</small></span>)}</div>;
-  if (kind === "contract") return <div className={styles.contractVisual}><div><span>Avtale_Nordic.pdf</span><small>Klar for signering</small></div><b>Send avtale →</b></div>;
+  if (kind === "contract") return <ContractVisual />;
   if (kind === "insight") return <div className={styles.insightVisual}><svg viewBox="0 0 280 90" preserveAspectRatio="none"><path pathLength="1" d="M0 75 C35 70 45 42 78 53 S120 71 145 34 S190 54 217 25 S255 28 280 8"/></svg><div><span>Vunnet</span><b>284 500 kr</b><em>+18%</em></div></div>;
   return <div className={styles.isolationVisual}><span><i>A</i><b>Organisasjon A</b></span><div/><span><i>B</i><b>Organisasjon B</b></span></div>;
 }
