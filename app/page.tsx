@@ -33,7 +33,7 @@ const MiniTable = ({ compact = false }: { compact?: boolean }) => (
 
 const plans = [
   {name:'Den Enkle',price:'150 kr',suffix:'per lisens (bruker)',copy:'Et ferdiglaget salgsdashboard med fast standardoppsett, uten selvvalgte endringer.',points:['Ferdiglaget salgsdashboard','Standard pipeline og salgssteg','Kunde- og kontaktoversikt','Oppgaver og aktivitetslogg','Grunnleggende salgsrapporter']},
-  {name:'Vekst',price:'Tilpasset',suffix:'etter omfang',copy:'For team i vekst som trenger mer av arbeidsflaten.',points:['Alt i Den Enkle','Kontrakter og signering','Analyse per selger','Flere roller og moduler'],hot:true},
+  {name:'Vekst',price:'Tilpasset',suffix:'etter omfang',copy:'Alt fra Den Enkle, med mindre tilpasninger som ikke krever nye moduler eller større utvikling.',points:['Alt i Den Enkle','Egne farger og enkel profilering','Mindre endringer i tekst og felter','Små justeringer av standardoppsettet'],hot:true},
   {name:'Skala',price:'Tilpasset',suffix:'etter omfang',copy:'For flere avdelinger eller organisasjoner.',points:['Alt i Vekst','Flere organisasjoner','Avdelingsvis rapportering','Tilpasset onboarding']},
 ];
 
