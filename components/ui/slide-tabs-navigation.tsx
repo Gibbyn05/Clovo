@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Menu, X } from "lucide-react";
+import { LiquidMetalButton } from "./liquid-metal-button";
 import styles from "./slide-tabs-navigation.module.css";
 
 const items = [
@@ -83,7 +84,7 @@ export function SlideTabsNavigation() {
 
         <div className={styles.actions}>
           <Link href="/login" className={styles.login}>Logg inn</Link>
-          <Link href="/demo" className={styles.demo}>Bestill demo <ArrowRight /></Link>
+          <LiquidMetalButton href="/demo" />
         </div>
 
         <button
