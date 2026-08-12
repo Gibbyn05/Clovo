@@ -74,3 +74,4 @@
 .subscribe input{color:var(--ink)}
 .subscribe input::placeholder{color:#8b8989;opacity:1}
 .subscribe button{background:#ff5b35;font-weight:750;box-shadow:0 8px 18px rgba(255,91,53,.24)}
+.exclusive{position:absolute;right:15px;top:15px;padding:4px 9px;border:1px solid #ffb9a8;border-radius:10px;background:#fff3ef;color:#e64925;font-size:8px;font-weight:750;letter-spacing:.04em;text-transform:uppercase}

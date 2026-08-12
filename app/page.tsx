@@ -32,9 +32,9 @@ const MiniTable = ({ compact = false }: { compact?: boolean }) => (
 );
 
 const plans = [
-  {name:'Den Enkle',price:'150 kr',suffix:'per lisens (bruker)',copy:'Et ferdiglaget salgsdashboard med fast standardoppsett, uten selvvalgte endringer.',points:['Ferdiglaget salgsdashboard','Standard pipeline og salgssteg','Kunde- og kontaktoversikt','Oppgaver og aktivitetslogg','Grunnleggende salgsrapporter']},
-  {name:'Vekst',price:'Tilpasset',suffix:'etter omfang',copy:'Alt fra Den Enkle, med mindre tilpasninger som ikke krever nye moduler eller større utvikling.',points:['Alt i Den Enkle','Egne farger og enkel profilering','Mindre endringer i tekst og felter','Små justeringer av standardoppsettet'],hot:true},
-  {name:'Skala',price:'Tilpasset',suffix:'etter omfang',copy:'For flere avdelinger eller organisasjoner.',points:['Alt i Vekst','Flere organisasjoner','Avdelingsvis rapportering','Tilpasset onboarding']},
+  {name:'Den Enkle',price:'150 kr',suffix:'per lisens (bruker)',copy:'Et ferdiglaget salgsdashboard med fast standardoppsett, uten selvvalgte endringer.',points:['Ferdiglaget salgsdashboard','Standard pipeline og salgssteg','Kunde- og kontaktoversikt','Oppgaver og aktivitetslogg','Grunnleggende salgsrapporter'],badge:undefined},
+  {name:'Vekst',price:'Tilpasset',suffix:'etter omfang',copy:'Alt fra Den Enkle, med mindre tilpasninger som ikke krever nye moduler eller større utvikling.',points:['Alt i Den Enkle','Egne farger og enkel profilering','Mindre endringer i tekst og felter','Små justeringer av standardoppsettet'],hot:true,badge:undefined},
+  {name:'Skala',price:'Etter avtale',suffix:'basert på behov og omfang',copy:'En eksklusiv løsning som skreddersys og videreutvikles fortløpende, helt ned til detaljene dere ønsker.',points:['Alt i Vekst','Fullt skreddersydd arbeidsflate','Løpende endringer etter behov','Egendefinerte prosesser, roller og visninger','Skreddersydde rapporter, mål og prognoser','Integrasjoner mot deres systemer','Prioritert oppfølging'],badge:'Eksklusiv'},
 ];
 
 export default function Home() {
@@ -53,7 +53,7 @@ export default function Home() {
 
     <section className={styles.blueBand}><div><b>Én</b><span>samlet arbeidsflate</span></div><div><b>100%</b><span>tilpasset oppsett</span></div><div><b>24/7</b><span>tilgang til ferske data</span></div><div><b>Alle</b><span>roller i samme system</span></div></section>
 
-    <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Start med standardoppsettet, eller velg en løsning tilpasset teamet.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>{p.suffix}</small><Button pale={!p.hot}>Bestill demo</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
+    <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Start med standardoppsettet, eller velg en løsning tilpasset teamet.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}{p.badge&&<span className={styles.exclusive}>{p.badge}</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>{p.suffix}</small><Button pale={!p.hot}>{p.badge?'Avtal en prat':'Bestill demo'}</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
 
     <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" name="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
 
