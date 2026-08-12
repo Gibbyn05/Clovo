@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarCheck, Mail, Video } from "lucide-react";
+import { ArrowRight, CheckCircle2, Mail, Phone } from "lucide-react";
 import styles from "./takk.module.css";
 
 export const metadata = {
-  title: "Møtet er booket | Clovo",
-  description: "Takk for at du booket en demo av Clovo.",
+  title: "Takk for henvendelsen | Clovo",
+  description: "Vi har mottatt demohenvendelsen din.",
 };
 
 export default function DemoThankYouPage() {
@@ -19,14 +19,14 @@ export default function DemoThankYouPage() {
       </nav>
 
       <section className={styles.card}>
-        <div className={styles.icon}><CalendarCheck /></div>
-        <span className={styles.kicker}>Møtet er booket</span>
+        <div className={styles.icon}><CheckCircle2 /></div>
+        <span className={styles.kicker}>Henvendelsen er mottatt</span>
         <h1>Takk for henvendelsen.</h1>
-        <p className={styles.lead}>Vi har mottatt bookingen og gleder oss til å vise hvordan Clovo kan passe salgsteamet deres.</p>
+        <p className={styles.lead}>Vi har mottatt informasjonen og bruker den til å forberede en relevant demo for salgsteamet deres.</p>
 
         <div className={styles.details}>
-          <div><Mail /><span><b>Bekreftelsen er sendt</b><small>Du mottar møtedetaljene på e-post.</small></span></div>
-          <div><Video /><span><b>Møtelenken følger med</b><small>Bruk lenken i kalenderinvitasjonen når møtet starter.</small></span></div>
+          <div><Mail /><span><b>Informasjonen er sendt</b><small>Henvendelsen er registrert hos Clovo.</small></span></div>
+          <div><Phone /><span><b>Vi følger opp</b><small>Har du ikke booket tidspunkt ennå, kan vi kontakte deg direkte.</small></span></div>
         </div>
 
         <Link href="/" className={styles.button}>Tilbake til forsiden <ArrowRight /></Link>

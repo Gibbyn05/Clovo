@@ -15,6 +15,10 @@ export function DemoForm({ initialEmail }: { initialEmail: string }) {
     setStatus("sending");
     setMessage("");
 
+    // Open synchronously from the submit action so browsers do not block the booking tab.
+    const bookingWindow = window.open("", "_blank");
+    if (bookingWindow) bookingWindow.opener = null;
+
     const form = event.currentTarget;
     const formData = new FormData(form);
     const payload = {
@@ -32,8 +36,11 @@ export function DemoForm({ initialEmail }: { initialEmail: string }) {
       if (!response.ok) throw new Error(result.error || "Noe gikk galt.");
       setStatus("success");
       form.reset();
-      router.push("/demo/book");
+      if (bookingWindow) bookingWindow.location.href = "/demo/book";
+      else window.open("/demo/book", "_blank", "noopener,noreferrer");
+      router.push("/demo/takk");
     } catch (error) {
+      bookingWindow?.close();
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Noe gikk galt. Prøv igjen.");
     }
