@@ -78,13 +78,25 @@ const Icon = ({
   );
 };
 
-const heroFrames = [
-  { title: "Dashboard", copy: "Widgets, farger og rekkefølge", metric: "100%" },
-  { title: "Pipeline", copy: "Steg, roller og salgsflyt", metric: "12" },
-  { title: "Team", copy: "Tilgang per selger og leder", metric: "4" },
-  { title: "Kontrakt", copy: "Maler og signering samlet", metric: "AI" },
-  { title: "Live", copy: "Samtaler, filer og aktivitet", metric: "Nå" },
-  { title: "Analyse", copy: "Resultater per selger og periode", metric: "47" },
+// Hvert element er ett ferdig eksempel på hvordan et dashboard kan settes opp.
+// De ligger spredt og tiltet som skjermbilder, slik at man ser variasjonen i
+// oppsett – ikke én mal alle presses inn i. `variant` styrer mini-UI-en som
+// tegnes inne i rammen, og `--accent` gir hvert eksempel sin egen fargeprofil.
+type ExampleVariant = "metrics" | "kanban" | "analytics" | "team" | "contracts" | "activity";
+
+const dashboardExamples: {
+  variant: ExampleVariant;
+  label: string;
+  domain: string;
+  accent: string;
+  featured?: boolean;
+}[] = [
+  { variant: "metrics", label: "Salgsoversikt", domain: "salg.dittteam.no", accent: "#3182f6", featured: true },
+  { variant: "kanban", label: "Pipeline", domain: "pipeline.dittteam.no", accent: "#6366f1" },
+  { variant: "analytics", label: "Analyse", domain: "innsikt.dittteam.no", accent: "#a855f7" },
+  { variant: "team", label: "Team", domain: "team.dittteam.no", accent: "#14b8a6" },
+  { variant: "contracts", label: "Kontrakter", domain: "avtaler.dittteam.no", accent: "#f59e0b" },
+  { variant: "activity", label: "Live aktivitet", domain: "live.dittteam.no", accent: "#3182f6" },
 ];
 
 const stats = [
@@ -131,17 +143,146 @@ const feedback = [
   "Dashboard, kontrakter, pipeline og aktivitet må henge sammen.",
 ];
 
+function ExampleUI({ variant }: { variant: ExampleVariant }) {
+  switch (variant) {
+    case "metrics":
+      return (
+        <>
+          <header className={styles.exHeader}>
+            <b>Salg denne uken</b>
+            <em>+18%</em>
+          </header>
+          <div className={styles.exMetrics}>
+            {[["Samtaler", "47"], ["Møter", "6"], ["Verdi", "284k"]].map(([k, v]) => (
+              <div key={k}>
+                <span>{k}</span>
+                <strong>{v}</strong>
+              </div>
+            ))}
+          </div>
+          <div className={styles.exBars}>
+            {[42, 58, 39, 76, 61, 88, 70].map((h, i) => (
+              <i className={i === 5 ? styles.exBarHot : ""} style={{ height: `${h}%` }} key={i} />
+            ))}
+          </div>
+        </>
+      );
+    case "kanban":
+      return (
+        <>
+          <header className={styles.exHeader}>
+            <b>Pipeline</b>
+            <em>12 aktive</em>
+          </header>
+          <div className={styles.exKanban}>
+            {[["Ny", 3], ["Tilbud", 2], ["Vunnet", 2]].map(([title, count]) => (
+              <div className={styles.exColumn} key={title as string}>
+                <p>{title}</p>
+                {Array.from({ length: count as number }).map((_, i) => (
+                  <span key={i} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </>
+      );
+    case "analytics":
+      return (
+        <>
+          <header className={styles.exHeader}>
+            <b>Analyse</b>
+            <em>Q3</em>
+          </header>
+          <div className={styles.exChart}>
+            <svg viewBox="0 0 120 56" preserveAspectRatio="none" aria-hidden="true">
+              <polyline points="0,44 20,36 40,40 60,24 80,28 100,12 120,18" fill="none" stroke="var(--accent)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+              <polygon points="0,44 20,36 40,40 60,24 80,28 100,12 120,18 120,56 0,56" fill="var(--accent)" opacity="0.14" />
+            </svg>
+          </div>
+          <div className={styles.exLegend}>
+            <span>Nye kunder</span>
+            <span>Gjenkjøp</span>
+          </div>
+        </>
+      );
+    case "team":
+      return (
+        <>
+          <header className={styles.exHeader}>
+            <b>Teamet</b>
+            <em>4 online</em>
+          </header>
+          <ul className={styles.exTeam}>
+            {[92, 74, 61, 48].map((w, i) => (
+              <li key={i}>
+                <span className={styles.exAvatar} />
+                <span className={styles.exTeamBar} style={{ width: `${w}%` }} />
+                <span className={i < 2 ? styles.exDotOn : styles.exDotOff} />
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+    case "contracts":
+      return (
+        <>
+          <header className={styles.exHeader}>
+            <b>Kontrakter</b>
+            <em>3 nye</em>
+          </header>
+          <ul className={styles.exDocs}>
+            {[["Signert", true], ["Sendt", false], ["Signert", true]].map(([status, done], i) => (
+              <li key={i}>
+                <span className={styles.exDocIcon} />
+                <span className={styles.exDocBar} />
+                <b className={done ? styles.exPillOn : styles.exPill}>{status}</b>
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+    case "activity":
+      return (
+        <>
+          <header className={styles.exHeader}>
+            <b>Live aktivitet</b>
+            <em>Nå</em>
+          </header>
+          <ul className={styles.exFeed}>
+            {["Tilbud sendt", "Møte booket", "Status endret", "Ny kunde"].map((item) => (
+              <li key={item}>
+                <span className={styles.exFeedDot} />
+                {item}
+                <em>Nå</em>
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+  }
+}
+
 function HeroPreview() {
   return (
-    <div className={styles.heroStack} aria-label="Eksempler på tilpassede dashboardmoduler">
-      {heroFrames.map((frame, index) => (
-        <article className={styles.heroFrame} style={{ "--i": index } as React.CSSProperties} key={frame.title}>
-          <div>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{frame.metric}</strong>
+    <div className={styles.heroStack} aria-label="Eksempler på tilpassede dashboards">
+      {dashboardExamples.map((example, index) => (
+        <article
+          className={`${styles.exhibit} ${example.featured ? styles.exhibitFeatured : ""}`}
+          style={{ "--i": index, "--accent": example.accent } as React.CSSProperties}
+          key={example.label}
+        >
+          <div className={styles.exhibitChrome}>
+            <span />
+            <span />
+            <span />
+            <p>{example.domain}</p>
           </div>
-          <h3>{frame.title}</h3>
-          <p>{frame.copy}</p>
+          <div className={styles.exhibitBody}>
+            <ExampleUI variant={example.variant} />
+          </div>
+          <span className={styles.exhibitTag}>
+            {String(index + 1).padStart(2, "0")} · {example.label}
+          </span>
         </article>
       ))}
     </div>
