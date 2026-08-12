@@ -32,9 +32,9 @@ const MiniTable = ({ compact = false }: { compact?: boolean }) => (
 );
 
 const plans = [
-  {name:'Team',price:'Tilpasset',copy:'For mindre salgsteam som vil ha struktur fra start.',points:['Custom dashboard','Pipeline og salgssteg','Selger- og lederroller','Eget isolert område']},
-  {name:'Vekst',price:'Tilpasset',copy:'For team i vekst som trenger mer av arbeidsflaten.',points:['Alt i Team','Kontrakter og signering','Analyse per selger','Flere roller og moduler'],hot:true},
-  {name:'Skala',price:'Tilpasset',copy:'For flere avdelinger eller organisasjoner.',points:['Alt i Vekst','Flere organisasjoner','Isolerte kundedata','Tilpasset onboarding']},
+  {name:'Den Enkle',price:'150 kr',suffix:'per lisens (bruker)',copy:'Et ferdiglaget salgsdashboard med fast standardoppsett, uten selvvalgte endringer.',points:['Ferdiglaget salgsdashboard','Standard pipeline og salgssteg','Kunde- og kontaktoversikt','Oppgaver og aktivitetslogg','Grunnleggende salgsrapporter']},
+  {name:'Vekst',price:'Tilpasset',suffix:'etter omfang',copy:'For team i vekst som trenger mer av arbeidsflaten.',points:['Alt i Den Enkle','Kontrakter og signering','Analyse per selger','Flere roller og moduler'],hot:true},
+  {name:'Skala',price:'Tilpasset',suffix:'etter omfang',copy:'For flere avdelinger eller organisasjoner.',points:['Alt i Vekst','Flere organisasjoner','Avdelingsvis rapportering','Tilpasset onboarding']},
 ];
 
 export default function Home() {
@@ -53,7 +53,7 @@ export default function Home() {
 
     <section className={styles.blueBand}><div><b>Én</b><span>samlet arbeidsflate</span></div><div><b>100%</b><span>tilpasset oppsett</span></div><div><b>24/7</b><span>tilgang til ferske data</span></div><div><b>Alle</b><span>roller i samme system</span></div></section>
 
-    <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Omfang og pris avklares ut fra team, roller og moduler.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>etter omfang</small><Button pale={!p.hot}>Bestill demo</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
+    <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Start med standardoppsettet, eller velg en løsning tilpasset teamet.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>{p.suffix}</small><Button pale={!p.hot}>Bestill demo</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
 
     <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" name="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
 
