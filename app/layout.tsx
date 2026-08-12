@@ -1,17 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Selvhostet (ingen ekstern nettverksforespørsel), variabel font eksponert
-// som --font-sans slik landingssiden forventer.
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Custom salgsdashboard | Bygget for teamet deres",
+  title: "Clovo | Salgsdashboard bygget for teamet deres",
   description:
     "Vi bygger et salgsdashboard rundt teamet deres, og dere kan tilpasse det videre når arbeidsflyten endrer seg.",
 };
@@ -20,7 +11,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#05070d",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -29,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nb" className={inter.variable}>
+    <html lang="nb">
       <body>{children}</body>
     </html>
   );

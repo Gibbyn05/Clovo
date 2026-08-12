@@ -1,479 +1,75 @@
 import Link from "next/link";
 import styles from "./landing.module.css";
 
-// Landingssiden er en frittstående markedsside. Appen (CRM-en) kjøres på egne
-// kunde-domener, så «Logg inn» peker ut av dette prosjektet. Sett denne til
-// riktig innloggings-URL når den er bestemt, f.eks.
-// "https://app.dittdomene.no/login".
 const LOGIN_URL = "/login";
-const DEMO_MAILTO = "mailto:post@reachr.no?subject=Jeg ønsker en demo av plattformen";
+const DEMO = "mailto:post@reachr.no?subject=Jeg ønsker en demo av Clovo";
 
-const DemoButton = ({ compact = false }: { compact?: boolean }) => (
-  <a className={compact ? styles.navCta : styles.primaryCta} href={DEMO_MAILTO}>
-    Bestill demo <span aria-hidden="true">↗</span>
-  </a>
-);
-
-type IconName =
-  | "layout"
-  | "wand"
-  | "shield"
-  | "chart"
-  | "pipeline"
-  | "users"
-  | "lock"
-  | "search"
-  | "upload"
-  | "rocket"
-  | "check"
-  | "arrow";
-
-const Icon = ({ name }: { name: IconName }) => {
-  const paths: Record<IconName, React.ReactNode> = {
-    layout: (
-      <>
-        <path d="M4 5h16v14H4z" />
-        <path d="M4 10h16M10 10v9" />
-      </>
-    ),
-    wand: (
-      <>
-        <path d="m15 4 1.5 3L20 8.5l-3.5 1.4L15 13l-1.5-3.1L10 8.5 13.5 7z" />
-        <path d="M4 20 13 11" />
-      </>
-    ),
-    shield: (
-      <>
-        <path d="M12 3 5 6v5.5c0 4.4 2.8 7.3 7 9 4.2-1.7 7-4.6 7-9V6z" />
-        <path d="m9.2 12 1.8 1.8 4-4" />
-      </>
-    ),
-    chart: <path d="M4 20V8M10 20V4M16 20v-7M22 20H2" />,
-    pipeline: (
-      <>
-        <circle cx="5" cy="6" r="2" />
-        <circle cx="19" cy="12" r="2" />
-        <circle cx="8" cy="19" r="2" />
-        <path d="M7 6h5a3 3 0 0 1 3 3 3 3 0 0 0 3 3M17.5 14c-1.1 3-3.5 5-7.5 5" />
-      </>
-    ),
-    users: (
-      <>
-        <path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20" />
-        <circle cx="9.5" cy="7.5" r="3.5" />
-        <path d="M21 20v-1a3.5 3.5 0 0 0-2.8-3.4M16.5 4.3a3.4 3.4 0 0 1 0 6.4" />
-      </>
-    ),
-    lock: (
-      <>
-        <rect x="5" y="10" width="14" height="10" rx="2" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-      </>
-    ),
-    search: (
-      <>
-        <circle cx="11" cy="11" r="7" />
-        <path d="m20 20-3.5-3.5" />
-      </>
-    ),
-    upload: (
-      <>
-        <path d="M12 16V4m0 0-4 4m4-4 4 4" />
-        <path d="M4 20h16" />
-      </>
-    ),
-    rocket: (
-      <>
-        <path d="M5 15c-1 1-1.5 4-1.5 4s3-.5 4-1.5a2.1 2.1 0 0 0-2.5-2.5z" />
-        <path d="M9 12c1.5-4 4-7 9-8 .3 4.5-1.5 8-6 9.5z" />
-        <path d="m9 12 3 3" />
-      </>
-    ),
-    check: <path d="m5 12 4.5 4.5L19 7" />,
-    arrow: <path d="M5 12h14m0 0-6-6m6 6-6 6" />,
+const Icon = ({ name }: { name: string }) => {
+  const paths: Record<string, React.ReactNode> = {
+    chart: <><path d="M4 19V9m6 10V5m6 14v-7m4 7H2" /></>,
+    bulb: <><path d="M9 18h6M10 22h4M8.5 14.5C7.6 13.6 7 12 7 10.5a5 5 0 0 1 10 0c0 1.5-.6 3.1-1.5 4-.8.8-1.2 1.5-1.3 2.5h-4.4c-.1-1-.5-1.7-1.3-2.5Z" /></>,
+    users: <><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 0 1 10 0v1M16 4.5a3 3 0 0 1 0 5.8M18 14a5 5 0 0 1 3 4.6V20"/></>,
+    briefcase: <><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M3 12h18"/></>,
+    check: <path d="m5 12 4 4L19 6"/>,
+    arrow: <path d="M5 12h13m-4-4 4 4-4 4"/>,
   };
-
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {paths[name]}
-    </svg>
-  );
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 };
 
-// --- Data ---------------------------------------------------------------
+const Button = ({ children = "Bestill demo", pale = false }: { children?: React.ReactNode; pale?: boolean }) => (
+  <a href={DEMO} className={pale ? styles.paleButton : styles.button}>{children}<Icon name="arrow" /></a>
+);
 
-const trustPoints = [
-  "Ferdig oppsett fra dag én",
-  "Tilpasses underveis",
-  "Eget isolert område per kunde",
-];
+const MiniTable = ({ compact = false }: { compact?: boolean }) => (
+  <div className={`${styles.miniTable} ${compact ? styles.compact : ""}`}>
+    <div className={styles.tableHead}><b>Pipeline</b><span>Se alle</span></div>
+    {[['Nordic Labs','Tilbud','84 000'],['Fjord Digital','Møte','42 500'],['Aker Studio','Vunnet','128 000'],['Oslo Tech','Lead','31 200']].slice(0, compact ? 3 : 4).map((r,i)=><div className={styles.tableRow} key={r[0]}><i className={styles.dot}>{r[0][0]}</i><b>{r[0]}</b><em className={i===2?styles.won:""}>{r[1]}</em><span>{r[2]}</span></div>)}
+  </div>
+);
+
+const Dashboard = () => (
+  <div className={styles.dashboard}>
+    <aside><div className={styles.dashLogo}>C</div>{['Oversikt','Pipeline','Kunder','Kontrakter','Analyse'].map((x,i)=><span className={i===0?styles.active:""} key={x}>{x}</span>)}</aside>
+    <div className={styles.dashMain}><p>Hei, teamet 👋</p><div className={styles.stats}><div><span>Pipeline</span><b>925 400 kr</b></div><div><span>Vunnet i år</span><b>18 avtaler</b></div></div><div className={styles.dashBody}><div className={styles.bars}>{[34,58,46,73,52,88,66].map((h,i)=><i key={i} style={{height:`${h}%`}} />)}</div><div className={styles.ring}>72<small>%</small></div></div><MiniTable compact /></div>
+  </div>
+);
 
 const features = [
-  {
-    icon: "layout" as const,
-    title: "Custom dashboard",
-    copy: "Vi setter opp dashboardet slik teamet faktisk skal bruke det – ikke en standardmal alle må presse seg inn i.",
-  },
-  {
-    icon: "pipeline" as const,
-    title: "Egen salgsprosess",
-    copy: "Pipeline, kundereise og salgsflyt bygges rundt produktene og måten teamet selger på.",
-  },
-  {
-    icon: "users" as const,
-    title: "Team og roller",
-    copy: "Selgere ser sin egen arbeidsflate, ledere ser hele teamet. Tilgang styres per rolle.",
-  },
-  {
-    icon: "wand" as const,
-    title: "Endres underveis",
-    copy: "Flytt widgets, skjul sider, endre farger og rekkefølge, og tilpass arbeidsflyten etter hvert.",
-  },
-  {
-    icon: "chart" as const,
-    title: "Analyse og innsikt",
-    copy: "Resultater per selger, periode og steg samlet – slik at ledelsen ser hva som faktisk driver salget.",
-  },
-  {
-    icon: "shield" as const,
-    title: "Adskilt per kunde",
-    copy: "Hver organisasjon får isolerte brukere, filer, kunder, salg, kontrakter og sanntidsdata.",
-  },
-];
-
-const setupSteps = [
-  { icon: "search" as const, title: "Kartlegg", copy: "Vi går gjennom roller, mål, salgsflyt og hvilke sider teamet faktisk trenger." },
-  { icon: "layout" as const, title: "Bygg", copy: "Vi setter opp dashboard, widgets, pipeline, roller, moduler og kundevisninger." },
-  { icon: "rocket" as const, title: "Lever", copy: "Teamet får en ferdig arbeidsflate med riktig struktur fra dag én." },
-  { icon: "wand" as const, title: "Juster", copy: "Oppsettet kan endres senere uten at dere må starte på nytt." },
-];
-
-// Ekte, anonymiserte behov vi bygger rundt – ikke oppdiktede kunder.
-const needs = [
-  { role: "Selger", quote: "Jeg vil se min egen arbeidsflate med mine kunder og mine tall, ikke et generisk system." },
-  { role: "Salgsleder", quote: "Jeg må kunne følge hele teamet, pipeline og aktivitet på ett sted – i sanntid." },
-  { role: "Daglig leder", quote: "Vi trenger et oppsett som kan endres når salgsprosessen og produktene endrer seg." },
-  { role: "Operations", quote: "Dashboard, kontrakter, pipeline og aktivitet må henge sammen, ikke leve i hver sin fane." },
+  ['chart','Full oversikt','Se pipeline, aktivitet og resultater samlet i sanntid.'],
+  ['bulb','Bygget for dere','Dashboard, sider og arbeidsflyt tilpasses salgsprosessen.'],
+  ['users','Samarbeid enklere','Selgere og ledere jobber i samme system med riktige roller.'],
+  ['briefcase','Alt organisert','Kunder, kontrakter, oppgaver og filer er samlet på ett sted.'],
 ];
 
 const plans = [
-  {
-    name: "Team",
-    tagline: "For mindre salgsteam som vil ha struktur fra start.",
-    points: ["Custom dashboard", "Pipeline og salgssteg", "Roller for selger og leder", "Eget isolert område"],
-  },
-  {
-    name: "Vekst",
-    tagline: "For team i vekst som trenger mer av arbeidsflaten.",
-    points: ["Alt i Team", "Kontrakter og signering", "Analyse per selger og periode", "Flere roller og moduler"],
-    featured: true,
-  },
-  {
-    name: "Skala",
-    tagline: "For flere avdelinger eller flere kunder i samme oppsett.",
-    points: ["Alt i Vekst", "Flere organisasjoner", "Isolerte data per kunde", "Tilpasset onboarding"],
-  },
+  {name:'Team',price:'Tilpasset',copy:'For mindre salgsteam som vil ha struktur fra start.',points:['Custom dashboard','Pipeline og salgssteg','Selger- og lederroller','Eget isolert område']},
+  {name:'Vekst',price:'Tilpasset',copy:'For team i vekst som trenger mer av arbeidsflaten.',points:['Alt i Team','Kontrakter og signering','Analyse per selger','Flere roller og moduler'],hot:true},
+  {name:'Skala',price:'Tilpasset',copy:'For flere avdelinger eller organisasjoner.',points:['Alt i Vekst','Flere organisasjoner','Isolerte kundedata','Tilpasset onboarding']},
 ];
 
-// --- Hero-mockup (blå dashboard-klynge) ---------------------------------
-
-function HeroCluster() {
-  return (
-    <div className={styles.cluster} aria-label="Eksempel på et Clovo-dashboard">
-      <article className={`${styles.clusterCard} ${styles.cardStat}`}>
-        <span>Totalt i pipeline</span>
-        <strong>284k</strong>
-        <em className={styles.trendUp}>▲ 18% denne måneden</em>
-      </article>
-
-      <article className={`${styles.clusterCard} ${styles.cardChart}`}>
-        <header>
-          <b>Statistikk</b>
-          <span className={styles.chartLegend}>
-            <i>Inn</i>
-            <i className={styles.legendMuted}>Ut</i>
-          </span>
-        </header>
-        <div className={styles.chartBars}>
-          {[46, 62, 40, 78, 55, 90, 68].map((h, i) => (
-            <span key={i}>
-              <i style={{ height: `${h}%` }} className={i === 5 ? styles.barHot : ""} />
-              <i style={{ height: `${Math.max(18, h - 28)}%` }} className={styles.barGhost} />
-            </span>
-          ))}
-        </div>
-      </article>
-
-      <article className={`${styles.clusterCard} ${styles.cardAccount}`}>
-        <div className={styles.accountAvatar} aria-hidden="true">AA</div>
-        <div>
-          <b>Primærkonto</b>
-          <span>Aktiv · 12 åpne salg</span>
-        </div>
-      </article>
-
-      <article className={`${styles.clusterCard} ${styles.cardPipeline}`}>
-        <header>
-          <b>Pipeline</b>
-          <span>Denne uken</span>
-        </header>
-        <ul>
-          {[["Nytt lead", true], ["Tilbud sendt", true], ["Forhandling", false], ["Vunnet", false]].map(([label, done]) => (
-            <li key={label as string} className={done ? styles.stageDone : ""}>
-              <span className={styles.stageDot}>{done ? <Icon name="check" /> : null}</span>
-              {label}
-            </li>
-          ))}
-        </ul>
-      </article>
-    </div>
-  );
-}
-
-// Liten dashboard-visual gjenbrukt inne i funksjonskortene.
-function FeatureVisual({ icon }: { icon: IconName }) {
-  return (
-    <div className={styles.featureVisual} aria-hidden="true">
-      <Icon name={icon} />
-    </div>
-  );
-}
-
 export default function Home() {
-  return (
-    <main className={styles.page}>
-      <header className={styles.navWrap}>
-        <nav className={styles.nav} aria-label="Hovedmeny">
-          <Link href="/" className={styles.logo} aria-label="Clovo forside">
-            <span>+</span> CLOVO
-          </Link>
-          <div className={styles.navLinks}>
-            <a href="#funksjoner">Funksjoner</a>
-            <a href="#oppsett">Oppsett</a>
-            <a href="#priser">Priser</a>
-            <a href="#demo">Kontakt</a>
-          </div>
-          <div className={styles.navActions}>
-            <a href={LOGIN_URL}>Logg inn</a>
-            <DemoButton compact />
-          </div>
-        </nav>
-      </header>
+  return <main className={styles.page}>
+    <header className={styles.header}><nav><Link href="/" className={styles.logo}><i>C</i><b>Clovo</b></Link><div className={styles.links}><a href="#hjem">Hjem</a><a href="#funksjoner">Funksjoner⌄</a><a href="#oppsett">Oppsett</a><a href="#priser">Priser</a><a href="#kontakt">Kontakt</a></div><div className={styles.navActions}><a href={LOGIN_URL}>Logg inn</a><Button /></div></nav></header>
 
-      {/* HERO */}
-      <section className={styles.hero}>
-        <div className={styles.heroGlow} />
-        <div className={styles.gridMark} />
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <p className={styles.newsPill}>
-              <span>Nytt</span> Bygget rundt teamet deres – ikke en mal
-            </p>
-            <h1>
-              Alt salgsarbeidet samlet i <span>ett dashboard</span>
-            </h1>
-            <p className={styles.heroLede}>
-              Et salgsdashboard laget rundt teamet, prosessen og målene deres. Vi setter opp første versjon, og dere kan endre sider, widgets, farger, roller og arbeidsflyt når dere vil.
-            </p>
-            <div className={styles.heroActions}>
-              <DemoButton />
-              <a href="#oppsett" className={styles.ghostCta}>
-                Se oppsettet <Icon name="arrow" />
-              </a>
-            </div>
-            <div className={styles.heroBadges}>
-              {trustPoints.map((point) => (
-                <span key={point}>
-                  <Icon name="check" /> {point}
-                </span>
-              ))}
-            </div>
-          </div>
-          <HeroCluster />
-        </div>
-      </section>
+    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><div className={styles.eyebrow}><span>Nytt</span> Dashboard bygget rundt teamet <b>›</b></div><h1>Få kontroll på<br/><strong>hele salgsarbeidet</strong></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button/><a className={styles.learn} href="#funksjoner">Se hvordan</a></div><div className={styles.rating}><b>4.9 ★</b><span>Tilpasset fra dag én</span><div className={styles.avatars}><i>AM</i><i>LS</i><i>JK</i></div></div></div><div className={styles.heroVisual}><div className={styles.courseTop}><b>Pipeline</b><span>Se alle</span></div><MiniTable/><div className={styles.floating}><small>Aktiv pipeline</small><b>925 400 kr</b><div><span>18 avtaler</span><span className={styles.orange}>+12%</span></div></div></div></section>
 
-      {/* TRUST */}
-      <section className={styles.trust} aria-label="Slik leveres plattformen">
-        <p>Bygget for norske salgsteam som vil ha et system som passer måten de faktisk jobber på</p>
-        <div className={styles.trustRow}>
-          {trustPoints.map((point) => (
-            <span key={point}>{point}</span>
-          ))}
-        </div>
-      </section>
+    <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div></section>
 
-      {/* FEATURES */}
-      <section id="funksjoner" className={styles.features}>
-        <div className={styles.sectionIntro}>
-          <p>// FUNKSJONER</p>
-          <h2>Alt teamet trenger i ett dashboard</h2>
-          <p className={styles.sectionLede}>
-            Samme system, forskjellig oppsett for hvert team. Her er byggeklossene vi setter sammen rundt kunden.
-          </p>
-        </div>
-        <div className={styles.featureGrid}>
-          {features.map((feature) => (
-            <article key={feature.title}>
-              <FeatureVisual icon={feature.icon} />
-              <h3>{feature.title}</h3>
-              <p>{feature.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+    <section className={styles.section} id="funksjoner"><div className={styles.heading}><h2>Et salgsdashboard som faktisk passer</h2><p>Slutt å tilpasse teamet til systemet. Clovo tilpasses måten dere jobber på.</p></div><div className={styles.experience}><div className={styles.dashboardFrame}><Dashboard/><button aria-label="Spill av demo">▶</button></div><div className={styles.featureGrid}>{features.map(([icon,title,copy],i)=><article key={title} className={i===0?styles.tint:""}><span><Icon name={icon}/></span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
 
-      {/* SETUP + DEMO-SKJEMA */}
-      <section id="oppsett" className={styles.setup}>
-        <div className={styles.setupSteps}>
-          <div className={styles.sectionIntro}>
-            <p>// OPPSETT</p>
-            <h2>Enkelt oppsett. Kraftige resultater.</h2>
-          </div>
-          <ol>
-            {setupSteps.map((step, index) => (
-              <li key={step.title}>
-                <span className={styles.stepIcon}>
-                  <Icon name={step.icon} />
-                </span>
-                <div>
-                  <b>
-                    {String(index + 1).padStart(2, "0")} · {step.title}
-                  </b>
-                  <p>{step.copy}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
+    <section className={styles.section}><div className={styles.heading}><h2>Smarte funksjoner. Bedre salg.</h2><p>Følg aktivitet, fremdrift og resultater uten å miste oversikten.</p></div><div className={styles.smartGrid}><article className={styles.performance}><h3>Resultater i sanntid</h3><p>Se utvikling, måloppnåelse og nøkkeltall per selger.</p><div className={styles.metricRow}><div><small>Vunnet denne måneden</small><b>284 500 kr</b></div><div><small>Måloppnåelse</small><b>82%</b></div></div><div className={styles.lineChart}><svg viewBox="0 0 600 130"><path d="M0 108 C60 102 62 76 120 83 S205 98 250 60 S330 82 380 46 S460 66 520 28 S570 22 600 10"/><path className={styles.fade} d="M0 108 C60 102 62 76 120 83 S205 98 250 60 S330 82 380 46 S460 66 520 28 S570 22 600 10 L600 130H0Z"/></svg></div></article><article className={styles.community}><h3>Teamets arbeidsflate</h3><p>Roller og tilgang gir alle akkurat den oversikten de trenger.</p>{['Selger','Salgsleder','Daglig leder'].map((x,i)=><div className={styles.person} key={x}><i>{x[0]}</i><span><b>{x}</b><small>{i===0?'Egne kunder og salg':i===1?'Hele teamets pipeline':'Overordnet innsikt'}</small></span><em>•••</em></div>)}</article><article><h3>Pipeline-fremdrift</h3><p>Følg hvert salg fra første kontakt til signert avtale.</p><MiniTable compact/></article><article><h3>Kontrakter og signering</h3><p>Hold avtaler, dokumenter og neste steg samlet.</p><div className={styles.contract}><span>Avtale_NordicLabs.pdf</span><b>Klar for signering</b><button>Send avtale</button></div></article><article><h3>Innsikt som kan brukes</h3><p>Se hva som driver salget og hvor prosessen stopper opp.</p><div className={styles.kpis}><b>15<small>aktive salg</small></b><b>20<small>oppgaver</small></b><b>82%<small>måloppnåelse</small></b></div></article></div><div className={styles.center}><Button/></div></section>
 
-        <form className={styles.demoForm} action={DEMO_MAILTO} method="post" encType="text/plain">
-          <h3>Bestill en demo</h3>
-          <p>Fortell kort om teamet, så viser vi hvordan dashboardet kan bygges for dere.</p>
-          <label>
-            Navn
-            <input type="text" name="Navn" placeholder="Ola Nordmann" autoComplete="name" />
-          </label>
-          <label>
-            Jobb-e-post
-            <input type="email" name="E-post" placeholder="ola@bedrift.no" autoComplete="email" />
-          </label>
-          <label>
-            Bedrift
-            <input type="text" name="Bedrift" placeholder="Bedrift AS" autoComplete="organization" />
-          </label>
-          <button type="submit">Bestill demo</button>
-          <small>Åpner e-post til post@reachr.no. Ingen forpliktelser.</small>
-        </form>
-      </section>
+    <section className={styles.section} id="oppsett"><div className={styles.heading}><h2>Enkelt å komme i gang</h2><p>Fra kartlegging til ferdig arbeidsflate i tre tydelige steg.</p></div><div className={styles.steps}><article><div className={styles.formMock}><small>Bedrift</small><span>Bedrift AS</span><small>Jobb-e-post</small><span>navn@bedrift.no</span><button>Bestill demo</button></div><i>Steg 1</i><h3>Kartlegg behovet</h3><p>Vi går gjennom roller, mål, salgsflyt og hvilke sider teamet trenger.</p></article><article><MiniTable compact/><i>Steg 2</i><h3>Vi bygger oppsettet</h3><p>Dashboard, pipeline, moduler og visninger settes opp rundt dere.</p></article><article><div className={styles.roleMock}>{['Selger','Salgsleder','Administrator'].map((x,i)=><span key={x}><i>{x[0]}</i><b>{x}</b><em>{i===0?'Egne data':'Full oversikt'}</em></span>)}</div><i>Steg 3</i><h3>Teamet tar det i bruk</h3><p>Dere får en ferdig arbeidsflate som kan justeres når behovene endres.</p></article></div><div className={styles.center}><Button/></div></section>
 
-      {/* NEEDS / «TESTIMONIALS» */}
-      <section className={styles.needs}>
-        <div className={styles.sectionIntro}>
-          <p>// KUNDEBEHOV</p>
-          <h2>Det teamene faktisk ber om</h2>
-          <p className={styles.sectionLede}>
-            Typiske krav vi hører fra selgere, ledere og drift – og som vi bygger dashboardet rundt.
-          </p>
-        </div>
-        <div className={styles.needsGrid}>
-          {needs.map((need) => (
-            <article key={need.quote} className={styles.needCard}>
-              <p>“{need.quote}”</p>
-              <span>{need.role}</span>
-            </article>
-          ))}
-          <article className={styles.needHighlight}>
-            <p>Ett system</p>
-            <span>Dashboard, pipeline, kontrakter og sanntid henger sammen – ikke fire løsrevne verktøy.</span>
-          </article>
-        </div>
-      </section>
+    <section className={`${styles.section} ${styles.voices}`}><div className={styles.heading}><h2>Bygget rundt reelle behov</h2><p>Typiske krav fra rollene som skal bruke systemet hver dag.</p></div><div className={styles.quotes}>{[
+      ['Selger','«Jeg vil se mine kunder og mine tall, ikke et generisk system.»'],['Salgsleder','«Jeg må kunne følge teamet, pipeline og aktivitet på ett sted.»'],['Daglig leder','«Oppsettet må kunne endres når prosessen og produktene endrer seg.»'],['Operations','«Dashboard, kontrakter og aktivitet må henge sammen.»'],['Selger','«Jeg trenger å vite hva neste steg er, uten å lete i flere verktøy.»'],['Salgsleder','«Tallene må være oppdaterte når jeg åpner dashboardet.»']].map(([role,q],i)=><article key={i}><div className={styles.stars}>★★★★★</div><p>{q}</p><div className={styles.quotePerson}><i>{role[0]}</i><span><b>{role}</b><small>Typisk kundebehov</small></span></div></article>)}</div></section>
 
-      {/* PRICING */}
-      <section id="priser" className={styles.pricing}>
-        <div className={styles.sectionIntro}>
-          <p>// PRISER</p>
-          <h2>Fleksibelt for hvert team</h2>
-          <p className={styles.sectionLede}>
-            Prisen settes etter omfanget – roller, moduler og hvor mange organisasjoner dere trenger. Vi avklarer alt i demoen.
-          </p>
-        </div>
-        <div className={styles.priceGrid}>
-          {plans.map((plan) => (
-            <article key={plan.name} className={plan.featured ? styles.priceFeatured : ""}>
-              {plan.featured ? <span className={styles.priceTag}>Mest valgt</span> : null}
-              <h3>{plan.name}</h3>
-              <p className={styles.priceTagline}>{plan.tagline}</p>
-              <div className={styles.priceAmount}>
-                <strong>Tilpasset</strong>
-                <span>etter omfang</span>
-              </div>
-              <ul>
-                {plan.points.map((point) => (
-                  <li key={point}>
-                    <Icon name="check" /> {point}
-                  </li>
-                ))}
-              </ul>
-              <a href={DEMO_MAILTO} className={plan.featured ? styles.primaryCta : styles.ghostCta}>
-                Bestill demo
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
+    <section className={styles.blueBand}><div><b>Én</b><span>samlet arbeidsflate</span></div><div><b>100%</b><span>tilpasset oppsett</span></div><div><b>24/7</b><span>tilgang til ferske data</span></div><div><b>Alle</b><span>roller i samme system</span></div></section>
 
-      {/* FINAL CTA */}
-      <section id="demo" className={styles.finalCta}>
-        <div className={styles.gridMark} />
-        <p>// DEMO</p>
-        <h2>Se hvordan dashboardet kan bygges for deres team</h2>
-        <div className={styles.finalActions}>
-          <DemoButton />
-          <a href={LOGIN_URL} className={styles.ghostCta}>
-            Allerede kunde? Logg inn
-          </a>
-        </div>
-      </section>
+    <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Omfang og pris avklares ut fra team, roller og moduler.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>etter omfang</small><Button pale={!p.hot}>Bestill demo</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
 
-      {/* FOOTER */}
-      <footer className={styles.footer}>
-        <div className={styles.footerTop}>
-          <div className={styles.footerBrand}>
-            <Link href="/" className={styles.logo}>
-              <span>+</span> CLOVO
-            </Link>
-            <p>Custom salgsdashboard bygget rundt kundens team, prosess og mål.</p>
-          </div>
-          <div className={styles.footerCols}>
-            <div>
-              <h4>Produkt</h4>
-              <a href="#funksjoner">Funksjoner</a>
-              <a href="#oppsett">Oppsett</a>
-              <a href="#priser">Priser</a>
-            </div>
-            <div>
-              <h4>Selskap</h4>
-              <a href="#demo">Kontakt</a>
-              <a href={DEMO_MAILTO}>Bestill demo</a>
-              <a href={LOGIN_URL}>Logg inn</a>
-            </div>
-            <div>
-              <h4>Juridisk</h4>
-              <a href="#">Personvern</a>
-              <a href="#">Vilkår</a>
-            </div>
-          </div>
-        </div>
-        <div className={styles.footerWordmark} aria-hidden="true">
-          CLOVO
-        </div>
-        <div className={styles.footerBase}>
-          <small>© {new Date().getFullYear()} Clovo. Alle rettigheter reservert.</small>
-          <small>Bygget med Next.js</small>
-        </div>
-      </footer>
-    </main>
-  );
+    <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
+
+    <footer className={styles.footer}><div className={styles.footerBrand}><Link href="/" className={styles.logo}><i>C</i><b>Clovo</b></Link><p>Salgsdashboard bygget rundt teamet, prosessen og målene deres.</p></div><div><b>Utforsk</b><a href="#hjem">Hjem</a><a href="#funksjoner">Funksjoner</a><a href="#priser">Priser</a><a href="#kontakt">Kontakt</a></div><div><b>Selskap</b><a href={DEMO}>Bestill demo</a><a href={LOGIN_URL}>Logg inn</a><a href="#">Personvern</a></div><div className={styles.social}>● ◉ ◌</div><small>© {new Date().getFullYear()} Clovo. Alle rettigheter reservert.</small></footer>
+  </main>;
 }
