@@ -3,6 +3,7 @@ import styles from "./landing.module.css";
 import { AnimatedAreaChart } from "@/components/animated-area-chart";
 import { Features } from "@/components/blocks/features-8";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { Footer } from "@/components/ui/modem-animated-footer";
 
 const LOGIN_URL = "/login";
 const DEMO = "mailto:post@reachr.no?subject=Jeg ønsker en demo av Clovo";
@@ -56,6 +57,6 @@ export default function Home() {
 
     <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
 
-    <footer className={styles.footer}><div className={styles.footerBrand}><Link href="/" className={styles.logo}><i>C</i><b>Clovo</b></Link><p>Salgsdashboard bygget rundt teamet, prosessen og målene deres.</p></div><div><b>Utforsk</b><a href="#hjem">Hjem</a><a href="#funksjoner">Funksjoner</a><a href="#priser">Priser</a><a href="#kontakt">Kontakt</a></div><div><b>Selskap</b><a href={DEMO}>Bestill demo</a><a href={LOGIN_URL}>Logg inn</a><a href="#">Personvern</a></div><div className={styles.social}>● ◉ ◌</div><small>© {new Date().getFullYear()} Clovo. Alle rettigheter reservert.</small></footer>
+    <Footer />
   </main>;
 }
