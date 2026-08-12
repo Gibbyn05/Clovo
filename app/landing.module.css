@@ -65,6 +65,271 @@
 @media(max-width:800px){.trusted .trustedGroup{width:calc(100vw - 32px);gap:48px;justify-content:flex-start}.trusted .trustedTrack{animation-duration:17s}}
 @media(prefers-reduced-motion:reduce){.trusted .trustedTrack{animation:none;transform:none}.trusted .trustedGroup[aria-hidden="true"]{display:none}.trusted .trustedGroup{flex-wrap:wrap;justify-content:center;gap:22px}}
 
+/* Responsive layout safeguards */
+@media (max-width: 1100px) {
+  .hero {
+    gap: 36px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .floating {
+    left: -18px;
+  }
+
+  .smartGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .smartGrid .performance {
+    grid-column: span 2;
+  }
+
+  .smartGrid .insight {
+    grid-column: auto;
+  }
+
+  .plans {
+    gap: 16px;
+  }
+
+  .plans article {
+    padding: 22px;
+  }
+
+  .subscribe form {
+    width: min(420px, 48vw);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 64px;
+  }
+
+  .heroCopy {
+    max-width: 680px;
+  }
+
+  .heroVisual {
+    width: 100%;
+    max-width: 720px;
+    margin: 12px auto 0;
+  }
+
+  .experience {
+    grid-template-columns: 1fr;
+  }
+
+  .subscribe {
+    padding: 42px 36px;
+  }
+}
+
+@media (max-width: 800px) {
+  .page {
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  .heroVisual,
+  .miniTable,
+  .smartGrid,
+  .steps,
+  .plans,
+  .subscribe {
+    min-width: 0;
+  }
+
+  .plans p {
+    height: auto;
+    min-height: 36px;
+  }
+
+  .steps > article:first-child {
+    border-top: 0;
+  }
+
+  .subscribe form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero,
+  .trusted {
+    width: calc(100% - 32px);
+  }
+
+  .hero {
+    padding: 44px 0 48px;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 12vw, 46px);
+    letter-spacing: -2px;
+  }
+
+  .heroCopy > p {
+    font-size: 14px;
+  }
+
+  .heroButtons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .heroButtons > * {
+    width: 100%;
+  }
+
+  .learn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .heroVisual {
+    min-height: 320px;
+    padding: 26px 10px 0;
+  }
+
+  .courseTop {
+    padding: 0 10px;
+  }
+
+  .miniTable {
+    padding: 8px 10px;
+  }
+
+  .tableRow {
+    grid-template-columns: 24px minmax(0, 1.4fr) minmax(46px, .7fr) minmax(48px, .7fr);
+    gap: 5px;
+    font-size: 9px;
+  }
+
+  .tableRow b,
+  .tableRow em,
+  .tableRow span {
+    min-width: 0;
+  }
+
+  .floating {
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
+    width: auto;
+    padding: 14px;
+  }
+
+  .trusted {
+    margin-bottom: 64px;
+  }
+
+  .trusted .trustedGroup {
+    width: calc(100vw - 32px);
+    gap: 34px;
+  }
+
+  .section {
+    padding: 52px 16px;
+  }
+
+  .heading {
+    margin-bottom: 34px;
+  }
+
+  .heading h2 {
+    font-size: 27px;
+  }
+
+  .smartGrid > article {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .metricRow {
+    gap: 28px;
+    justify-content: space-between;
+  }
+
+  .metricRow > div {
+    min-width: 0;
+  }
+
+  .person em {
+    flex: none;
+  }
+
+  .kpis {
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .kpis b {
+    min-width: 0;
+    font-size: 18px;
+  }
+
+  .steps > article {
+    padding: 24px 8px;
+  }
+
+  .blueBand {
+    gap: 30px 20px;
+    padding: 36px 24px;
+  }
+
+  .blueBand b {
+    font-size: 25px;
+  }
+
+  .subscribe {
+    width: calc(100% - 32px);
+    margin: 40px auto 64px;
+    padding: 30px 20px;
+  }
+
+  .subscribe h2 {
+    font-size: 26px;
+  }
+
+  .subscribe form {
+    display: grid;
+    gap: 8px;
+    padding: 7px;
+  }
+
+  .subscribe input,
+  .subscribe button {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+  }
+}
+
+@media (max-width: 380px) {
+  .tableRow {
+    grid-template-columns: 22px minmax(0, 1fr) 46px;
+  }
+
+  .tableRow > span {
+    display: none;
+  }
+
+  .blueBand {
+    grid-template-columns: 1fr;
+  }
+
+  .kpis {
+    flex-wrap: wrap;
+  }
+}
+
 /* The final CTA must remain fully legible instead of inheriting a partial scroll-reveal state. */
 .subscribe,.subscribe>div,.subscribe form{animation:none;opacity:1;transform:none;clip-path:none}
 .subscribe{background:linear-gradient(110deg,#fff1ec,#ffe8e1);border:1px solid #ffd8cd;box-shadow:0 18px 50px rgba(91,38,22,.08)}
