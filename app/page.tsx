@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./landing.module.css";
 import { AnimatedAreaChart } from "@/components/animated-area-chart";
+import { Features } from "@/components/blocks/features-8";
 
 const LOGIN_URL = "/login";
 const DEMO = "mailto:post@reachr.no?subject=Jeg ønsker en demo av Clovo";
@@ -28,20 +29,6 @@ const MiniTable = ({ compact = false }: { compact?: boolean }) => (
   </div>
 );
 
-const Dashboard = () => (
-  <div className={styles.dashboard}>
-    <aside><div className={styles.dashLogo}>C</div>{['Oversikt','Pipeline','Kunder','Kontrakter','Analyse'].map((x,i)=><span className={i===0?styles.active:""} key={x}>{x}</span>)}</aside>
-    <div className={styles.dashMain}><p>Hei, teamet 👋</p><div className={styles.stats}><div><span>Pipeline</span><b>925 400 kr</b></div><div><span>Vunnet i år</span><b>18 avtaler</b></div></div><div className={styles.dashBody}><div className={styles.bars}>{[34,58,46,73,52,88,66].map((h,i)=><i key={i} style={{height:`${h}%`}} />)}</div><div className={styles.ring}>72<small>%</small></div></div><MiniTable compact /></div>
-  </div>
-);
-
-const features = [
-  ['chart','Full oversikt','Se pipeline, aktivitet og resultater samlet i sanntid.'],
-  ['bulb','Bygget for dere','Dashboard, sider og arbeidsflyt tilpasses salgsprosessen.'],
-  ['users','Samarbeid enklere','Selgere og ledere jobber i samme system med riktige roller.'],
-  ['briefcase','Alt organisert','Kunder, kontrakter, oppgaver og filer er samlet på ett sted.'],
-];
-
 const plans = [
   {name:'Team',price:'Tilpasset',copy:'For mindre salgsteam som vil ha struktur fra start.',points:['Custom dashboard','Pipeline og salgssteg','Selger- og lederroller','Eget isolert område']},
   {name:'Vekst',price:'Tilpasset',copy:'For team i vekst som trenger mer av arbeidsflaten.',points:['Alt i Team','Kontrakter og signering','Analyse per selger','Flere roller og moduler'],hot:true},
@@ -56,7 +43,7 @@ export default function Home() {
 
     <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div></section>
 
-    <section className={styles.section} id="funksjoner"><div className={styles.heading}><h2>Et salgsdashboard som faktisk passer</h2><p>Slutt å tilpasse teamet til systemet. Clovo tilpasses måten dere jobber på.</p></div><div className={styles.experience}><div className={styles.dashboardFrame}><Dashboard/><button aria-label="Spill av demo">▶</button></div><div className={styles.featureGrid}>{features.map(([icon,title,copy],i)=><article key={title} className={i===0?styles.tint:""}><span><Icon name={icon}/></span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+    <Features />
 
     <section className={styles.section}><div className={styles.heading}><h2>Smarte funksjoner. Bedre salg.</h2><p>Følg aktivitet, fremdrift og resultater uten å miste oversikten.</p></div><div className={styles.smartGrid}><article className={styles.performance}><h3>Resultater i sanntid</h3><p>Se utvikling, måloppnåelse og nøkkeltall per selger.</p><div className={styles.metricRow}><div><small>Vunnet denne måneden</small><b>284 500 kr</b></div><div><small>Måloppnåelse</small><b>82%</b></div></div><div className={styles.lineChart}><AnimatedAreaChart /></div></article><article className={styles.community}><h3>Teamets arbeidsflate</h3><p>Roller og tilgang gir alle akkurat den oversikten de trenger.</p>{['Selger','Salgsleder','Daglig leder'].map((x,i)=><div className={styles.person} key={x}><i>{x[0]}</i><span><b>{x}</b><small>{i===0?'Egne kunder og salg':i===1?'Hele teamets pipeline':'Overordnet innsikt'}</small></span><em>•••</em></div>)}</article><article><h3>Pipeline-fremdrift</h3><p>Følg hvert salg fra første kontakt til signert avtale.</p><MiniTable compact/></article><article><h3>Kontrakter og signering</h3><p>Hold avtaler, dokumenter og neste steg samlet.</p><div className={styles.contract}><span>Avtale_NordicLabs.pdf</span><b>Klar for signering</b><button>Send avtale</button></div></article><article><h3>Innsikt som kan brukes</h3><p>Se hva som driver salget og hvor prosessen stopper opp.</p><div className={styles.kpis}><b>15<small>aktive salg</small></b><b>20<small>oppgaver</small></b><b>82%<small>måloppnåelse</small></b></div></article></div><div className={styles.center}><Button/></div></section>
 
