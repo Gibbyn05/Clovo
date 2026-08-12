@@ -1,10 +1,12 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, LoaderCircle } from "lucide-react";
 import styles from "./demo.module.css";
 
 export function DemoForm({ initialEmail }: { initialEmail: string }) {
+  const router = useRouter();
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -30,6 +32,7 @@ export function DemoForm({ initialEmail }: { initialEmail: string }) {
       if (!response.ok) throw new Error(result.error || "Noe gikk galt.");
       setStatus("success");
       form.reset();
+      router.push("/demo/book");
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Noe gikk galt. Prøv igjen.");
