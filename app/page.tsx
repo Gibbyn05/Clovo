@@ -6,7 +6,7 @@ import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { Footer } from "@/components/ui/modem-animated-footer";
 
 const LOGIN_URL = "/login";
-const DEMO = "mailto:post@reachr.no?subject=Jeg ønsker en demo av Clovo";
+const DEMO = "/demo";
 
 const Icon = ({ name }: { name: string }) => {
   const paths: Record<string, React.ReactNode> = {
@@ -55,7 +55,7 @@ export default function Home() {
 
     <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Omfang og pris avklares ut fra team, roller og moduler.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>etter omfang</small><Button pale={!p.hot}>Bestill demo</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
 
-    <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
+    <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" name="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
 
     <Footer />
   </main>;

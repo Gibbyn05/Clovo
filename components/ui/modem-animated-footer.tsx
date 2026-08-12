@@ -36,8 +36,8 @@ const defaultNavLinks = [
 const defaultSocialLinks = [
   {
     icon: <Mail className="size-5" />,
-    href: "mailto:post@reachr.no",
-    label: "Send e-post til Clovo",
+    href: "/demo",
+    label: "Bestill demo av Clovo",
   },
 ];
 
