@@ -1,11 +1,10 @@
-import Link from "next/link";
 import styles from "./landing.module.css";
 import { AnimatedAreaChart } from "@/components/animated-area-chart";
 import { Features } from "@/components/blocks/features-8";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { Footer } from "@/components/ui/modem-animated-footer";
+import { SlideTabsNavigation } from "@/components/ui/slide-tabs-navigation";
 
-const LOGIN_URL = "/login";
 const DEMO = "/demo";
 
 const Icon = ({ name }: { name: string }) => {
@@ -39,7 +38,7 @@ const plans = [
 
 export default function Home() {
   return <main className={styles.page}>
-    <header className={styles.header}><nav><Link href="/" className={styles.logo}><i>C</i><b>Clovo</b></Link><div className={styles.links}><a href="#hjem">Hjem</a><a href="#funksjoner">Funksjoner⌄</a><a href="#oppsett">Oppsett</a><a href="#priser">Priser</a><a href="#kontakt">Kontakt</a></div><div className={styles.navActions}><a href={LOGIN_URL}>Logg inn</a><Button /></div></nav></header>
+    <SlideTabsNavigation />
 
     <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><div className={styles.eyebrow}><span>Nytt</span> Dashboard bygget rundt teamet <b>›</b></div><h1>Få kontroll på<br/><strong>hele salgsarbeidet</strong></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="#funksjoner">Se hvordan</a></div></div><div className={styles.heroVisual}><div className={styles.courseTop}><b>Pipeline</b><span>Se alle</span></div><MiniTable/><div className={styles.floating}><small>Aktiv pipeline</small><b>925 400 kr</b><div><span>18 avtaler</span><span className={styles.orange}>+12%</span></div></div></div></section>
 
