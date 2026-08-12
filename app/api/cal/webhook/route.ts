@@ -93,12 +93,17 @@ export async function POST(request: Request) {
     ${fields.map(([label, value]) => `<div style="padding:14px 0;border-bottom:1px solid #eee"><strong>${escapeHtml(label)}</strong><div style="margin-top:6px;white-space:pre-wrap">${escapeHtml(value)}</div></div>`).join("")}
   </div>`;
 
+  const recipients = Array.from(new Set([
+    process.env.DEMO_TO_EMAIL || "post@reachr.no",
+    ...(process.env.CAL_NOTIFICATION_EMAILS || "").split(","),
+  ].map(email => email.trim()).filter(Boolean)));
+
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: process.env.CLOVO_FROM_EMAIL || "Clovo <onboarding@resend.dev>",
-      to: [process.env.DEMO_TO_EMAIL || "post@reachr.no"],
+      to: recipients,
       reply_to: attendee?.email,
       subject: `${eventLabel}: ${attendee?.name || payload.title || "Clovo-demo"}`,
       html,
