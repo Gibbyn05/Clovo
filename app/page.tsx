@@ -81,22 +81,139 @@ const Icon = ({
 // Hvert element er ett ferdig eksempel på hvordan et dashboard kan settes opp.
 // De ligger spredt og tiltet som skjermbilder, slik at man ser variasjonen i
 // oppsett – ikke én mal alle presses inn i. `variant` styrer mini-UI-en som
-// tegnes inne i rammen, og `--accent` gir hvert eksempel sin egen fargeprofil.
+// tegnes, mens `theme` gir hvert eksempel sin egen stil: farger, bakgrunn,
+// font, nettleserlinje og hjørneradius. Slik ser hvert kort ut som et helt
+// eget designsystem, ikke seks varianter av samme kort.
 type ExampleVariant = "metrics" | "kanban" | "analytics" | "team" | "contracts" | "activity";
+
+const SANS = "\"Inter Variable\", Inter, ui-sans-serif, system-ui, -apple-system, sans-serif";
+const MONO = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
+const SERIF = "Georgia, \"Times New Roman\", \"Iowan Old Style\", serif";
+const ROUNDED = "\"Trebuchet MS\", \"Segoe UI\", system-ui, sans-serif";
+const HUMANIST = "\"Segoe UI\", -apple-system, system-ui, Roboto, sans-serif";
 
 const dashboardExamples: {
   variant: ExampleVariant;
   label: string;
   domain: string;
-  accent: string;
   featured?: boolean;
+  theme: Record<string, string>;
 }[] = [
-  { variant: "metrics", label: "Salgsoversikt", domain: "salg.dittteam.no", accent: "#3182f6", featured: true },
-  { variant: "kanban", label: "Pipeline", domain: "pipeline.dittteam.no", accent: "#6366f1" },
-  { variant: "analytics", label: "Analyse", domain: "innsikt.dittteam.no", accent: "#a855f7" },
-  { variant: "team", label: "Team", domain: "team.dittteam.no", accent: "#14b8a6" },
-  { variant: "contracts", label: "Kontrakter", domain: "avtaler.dittteam.no", accent: "#f59e0b" },
-  { variant: "activity", label: "Live aktivitet", domain: "live.dittteam.no", accent: "#3182f6" },
+  {
+    // 1 — mørk, blå «tech». Fremhevet kort.
+    variant: "metrics",
+    label: "Salgsoversikt",
+    domain: "salg.dittteam.no",
+    featured: true,
+    theme: {
+      "--accent": "#3182f6",
+      "--card-bg": "linear-gradient(180deg, rgba(17,19,23,.97), rgba(9,9,11,.97))",
+      "--card-panel": "rgba(255,255,255,.035)",
+      "--card-fg": "#f6f7fb",
+      "--card-muted": "rgba(246,247,251,.55)",
+      "--card-line": "rgba(255,255,255,.10)",
+      "--card-chrome": "rgba(255,255,255,.04)",
+      "--card-font": SANS,
+      "--card-heading": SANS,
+      "--card-label": MONO,
+      "--card-radius": "12px",
+    },
+  },
+  {
+    // 2 — lyst, luftig «Linear/Notion»-oppsett.
+    variant: "kanban",
+    label: "Pipeline",
+    domain: "pipeline.dittteam.no",
+    theme: {
+      "--accent": "#5b5bd6",
+      "--card-bg": "#ffffff",
+      "--card-panel": "#f3f3f7",
+      "--card-fg": "#1b1b29",
+      "--card-muted": "#6b6b7d",
+      "--card-line": "rgba(20,20,45,.11)",
+      "--card-chrome": "#f6f6f9",
+      "--card-font": HUMANIST,
+      "--card-heading": HUMANIST,
+      "--card-label": MONO,
+      "--card-radius": "16px",
+    },
+  },
+  {
+    // 3 — mørkt, redaksjonelt med serif og fiolett.
+    variant: "analytics",
+    label: "Analyse",
+    domain: "innsikt.dittteam.no",
+    theme: {
+      "--accent": "#b57cff",
+      "--card-bg": "linear-gradient(180deg, #16112a, #0c0914)",
+      "--card-panel": "rgba(160,110,240,.10)",
+      "--card-fg": "#efe9fb",
+      "--card-muted": "rgba(239,233,251,.58)",
+      "--card-line": "rgba(160,110,240,.20)",
+      "--card-chrome": "rgba(160,110,240,.10)",
+      "--card-font": SERIF,
+      "--card-heading": SERIF,
+      "--card-label": SERIF,
+      "--card-radius": "10px",
+    },
+  },
+  {
+    // 4 — varm, kremfarget flate med avrundet, «mykt» uttrykk.
+    variant: "team",
+    label: "Team",
+    domain: "team.dittteam.no",
+    theme: {
+      "--accent": "#e0644b",
+      "--card-bg": "#faf5ec",
+      "--card-panel": "#f0e9db",
+      "--card-fg": "#2b2420",
+      "--card-muted": "#8b7f70",
+      "--card-line": "rgba(70,50,25,.14)",
+      "--card-chrome": "#f2ebde",
+      "--card-font": ROUNDED,
+      "--card-heading": ROUNDED,
+      "--card-label": ROUNDED,
+      "--card-radius": "20px",
+    },
+  },
+  {
+    // 5 — dyp marineblå «terminal» i monospace med amber.
+    variant: "contracts",
+    label: "Kontrakter",
+    domain: "avtaler.dittteam.no",
+    theme: {
+      "--accent": "#f4b740",
+      "--card-bg": "linear-gradient(180deg, #0b1526, #070d18)",
+      "--card-panel": "rgba(120,165,225,.05)",
+      "--card-fg": "#e6edf8",
+      "--card-muted": "rgba(230,237,248,.52)",
+      "--card-line": "rgba(120,165,225,.16)",
+      "--card-chrome": "rgba(120,165,225,.09)",
+      "--card-font": MONO,
+      "--card-heading": MONO,
+      "--card-label": MONO,
+      "--card-radius": "5px",
+    },
+  },
+  {
+    // 6 — kraftig grønn merkevareflate, hvit tekst.
+    variant: "activity",
+    label: "Live aktivitet",
+    domain: "live.dittteam.no",
+    theme: {
+      "--accent": "#c9f7d5",
+      "--card-bg": "linear-gradient(155deg, #16a34a, #12813c)",
+      "--card-panel": "rgba(255,255,255,.14)",
+      "--card-fg": "#ffffff",
+      "--card-muted": "rgba(255,255,255,.74)",
+      "--card-line": "rgba(255,255,255,.24)",
+      "--card-chrome": "rgba(255,255,255,.12)",
+      "--card-font": SANS,
+      "--card-heading": SANS,
+      "--card-label": MONO,
+      "--card-radius": "14px",
+    },
+  },
 ];
 
 const stats = [
@@ -268,7 +385,7 @@ function HeroPreview() {
       {dashboardExamples.map((example, index) => (
         <article
           className={`${styles.exhibit} ${example.featured ? styles.exhibitFeatured : ""}`}
-          style={{ "--i": index, "--accent": example.accent } as React.CSSProperties}
+          style={{ "--i": index, ...example.theme } as React.CSSProperties}
           key={example.label}
         >
           <div className={styles.exhibitChrome}>

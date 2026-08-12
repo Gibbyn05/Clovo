@@ -314,11 +314,12 @@
   transform: translateX(calc(-50% + var(--x, 0px))) translateY(var(--y, 0px)) rotate(var(--r, 0deg));
   z-index: var(--z, 1);
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(16, 17, 20, .96), rgba(9, 9, 11, .96));
+  border: 1px solid var(--card-line);
+  border-radius: var(--card-radius, 12px);
+  background: var(--card-bg);
+  color: var(--card-fg);
+  font-family: var(--card-font);
   box-shadow: 0 40px 100px rgba(0, 0, 0, .55);
-  backdrop-filter: blur(18px);
   transition: transform 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
 }
 
@@ -342,25 +343,25 @@
   align-items: center;
   gap: 6px;
   padding: 9px 12px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, .035);
+  border-bottom: 1px solid var(--card-line);
+  background: var(--card-chrome);
 }
 
 .exhibitChrome span {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .16);
+  background: color-mix(in srgb, var(--card-fg) 20%, transparent);
 }
 
 .exhibitChrome span:first-child {
-  background: color-mix(in srgb, var(--accent) 80%, transparent);
+  background: color-mix(in srgb, var(--accent) 85%, transparent);
 }
 
 .exhibitChrome p {
   margin: 0 0 0 8px;
-  color: var(--dim);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: color-mix(in srgb, var(--card-fg) 45%, transparent);
+  font-family: var(--card-label, var(--card-font));
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .04em;
@@ -369,6 +370,7 @@
 .exhibitBody {
   padding: 16px 16px 18px;
   min-height: 168px;
+  color: var(--card-fg);
 }
 
 .exhibitTag {
@@ -387,7 +389,8 @@
 }
 
 .exHeader b {
-  color: var(--fg);
+  color: var(--card-fg);
+  font-family: var(--card-heading, var(--card-font));
   font-size: 15px;
   font-weight: 760;
   letter-spacing: -.01em;
@@ -395,7 +398,7 @@
 
 .exHeader em {
   color: var(--accent);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: var(--card-label, var(--card-font));
   font-size: 11px;
   font-weight: 800;
   font-style: normal;
@@ -411,21 +414,21 @@
 }
 
 .exMetrics div {
-  border: 1px solid var(--line);
+  border: 1px solid var(--card-line);
   border-radius: 8px;
   padding: 9px 10px;
-  background: rgba(255, 255, 255, .02);
+  background: var(--card-panel);
 }
 
 .exMetrics span {
   display: block;
-  color: var(--dim);
+  color: color-mix(in srgb, var(--card-fg) 46%, transparent);
   font-size: 10px;
   letter-spacing: .02em;
 }
 
 .exMetrics strong {
-  color: var(--fg);
+  color: var(--card-fg);
   font-size: 18px;
   font-weight: 780;
 }
@@ -441,7 +444,7 @@
 .exBars i {
   flex: 1;
   border-radius: 3px 3px 0 0;
-  background: rgba(255, 255, 255, .12);
+  background: color-mix(in srgb, var(--card-fg) 14%, transparent);
 }
 
 .exBarHot {
@@ -456,15 +459,16 @@
 }
 
 .exColumn {
-  border: 1px solid var(--line);
+  border: 1px solid var(--card-line);
   border-radius: 8px;
   padding: 8px;
-  background: rgba(255, 255, 255, .02);
+  background: var(--card-panel);
 }
 
 .exColumn p {
   margin: 0 0 8px;
-  color: var(--dim);
+  color: color-mix(in srgb, var(--card-fg) 46%, transparent);
+  font-family: var(--card-label, var(--card-font));
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .04em;
@@ -476,8 +480,8 @@
   height: 20px;
   margin-bottom: 6px;
   border-radius: 5px;
-  border-left: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
-  background: rgba(255, 255, 255, .05);
+  border-left: 2px solid color-mix(in srgb, var(--accent) 70%, var(--card-fg));
+  background: color-mix(in srgb, var(--card-fg) 8%, transparent);
 }
 
 .exColumn span:last-child {
@@ -503,7 +507,7 @@
 .exLegend span {
   position: relative;
   padding-left: 14px;
-  color: var(--muted);
+  color: var(--card-muted);
   font-size: 11px;
 }
 
@@ -520,7 +524,7 @@
 }
 
 .exLegend span:last-child::before {
-  background: rgba(255, 255, 255, .28);
+  background: color-mix(in srgb, var(--card-fg) 32%, transparent);
 }
 
 /* team */
@@ -537,7 +541,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--card-line);
 }
 
 .exTeam li:first-child {
@@ -549,13 +553,13 @@
   height: 22px;
   flex: none;
   border-radius: 50%;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 70%, transparent), rgba(255, 255, 255, .12));
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 30%, var(--card-fg)));
 }
 
 .exTeamBar {
   height: 8px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, .12);
+  background: color-mix(in srgb, var(--card-fg) 13%, transparent);
 }
 
 .exDotOn,
@@ -573,7 +577,7 @@
 }
 
 .exDotOff {
-  background: rgba(255, 255, 255, .16);
+  background: color-mix(in srgb, var(--card-fg) 18%, transparent);
 }
 
 /* contracts */
@@ -582,7 +586,7 @@
   align-items: center;
   gap: 10px;
   padding: 9px 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--card-line);
 }
 
 .exDocs li:first-child {
@@ -594,15 +598,15 @@
   height: 22px;
   flex: none;
   border-radius: 3px;
-  border: 1px solid var(--line-strong);
-  background: rgba(255, 255, 255, .04);
+  border: 1px solid color-mix(in srgb, var(--card-fg) 26%, transparent);
+  background: color-mix(in srgb, var(--card-fg) 5%, transparent);
 }
 
 .exDocBar {
   flex: 1;
   height: 8px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, .1);
+  background: color-mix(in srgb, var(--card-fg) 11%, transparent);
 }
 
 .exPill,
@@ -616,13 +620,13 @@
 }
 
 .exPillOn {
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: color-mix(in srgb, var(--accent) 72%, var(--card-fg));
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .exPill {
-  color: var(--muted);
-  background: rgba(255, 255, 255, .06);
+  color: var(--card-muted);
+  background: color-mix(in srgb, var(--card-fg) 8%, transparent);
 }
 
 /* activity */
@@ -631,8 +635,8 @@
   align-items: center;
   gap: 9px;
   padding: 9px 0;
-  border-top: 1px solid var(--line);
-  color: var(--fg);
+  border-top: 1px solid var(--card-line);
+  color: var(--card-fg);
   font-size: 12px;
 }
 
@@ -650,8 +654,8 @@
 
 .exFeed em {
   margin-left: auto;
-  color: var(--dim);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  color: color-mix(in srgb, var(--card-fg) 55%, transparent);
+  font-family: var(--card-label, var(--card-font));
   font-size: 10px;
   font-style: normal;
   letter-spacing: .04em;
