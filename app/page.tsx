@@ -33,9 +33,9 @@ const MiniTable = ({ compact = false }: { compact?: boolean }) => (
 );
 
 const plans = [
-  {name:'Den Enkle',price:'150 kr',suffix:'per lisens (bruker)',copy:'Et ferdiglaget salgsdashboard med fast standardoppsett, uten selvvalgte endringer.',points:['Ferdiglaget salgsdashboard','Standard pipeline og salgssteg','Kunde- og kontaktoversikt','Oppgaver og aktivitetslogg','Grunnleggende salgsrapporter'],badge:undefined},
-  {name:'Vekst',price:'Tilpasset',suffix:'etter omfang',copy:'Alt fra Den Enkle, med mindre tilpasninger som ikke krever nye moduler eller større utvikling.',points:['Alt i Den Enkle','Egne farger og enkel profilering','Mindre endringer i tekst og felter','Små justeringer av standardoppsettet'],hot:true,badge:undefined},
-  {name:'Skala',price:'Etter avtale',suffix:'basert på behov og omfang',copy:'En eksklusiv løsning som skreddersys og videreutvikles fortløpende, helt ned til detaljene dere ønsker.',points:['Alt i Vekst','Fullt skreddersydd arbeidsflate','Løpende endringer etter behov','Egendefinerte prosesser, roller og visninger','Skreddersydde rapporter, mål og prognoser','Integrasjoner mot deres systemer','Prioritert oppfølging'],badge:'Eksklusiv'},
+  {name:'Den enkle',price:'150 kr',suffix:'per lisens (bruker)',copy:'Et ferdiglaget salgsdashboard med fast standardoppsett, uten selvvalgte endringer.',points:['Ferdiglaget salgsdashboard','Standard pipeline og salgssteg','Kunde- og kontaktoversikt','Oppgaver og aktivitetslogg','Grunnleggende salgsrapporter'],badge:undefined},
+  {name:'Den fleksible',price:'Tilpasset',suffix:'etter omfang',copy:'Alt fra Den enkle, med mindre tilpasninger som ikke krever nye moduler eller større utvikling.',points:['Alt i Den enkle','Egne farger og enkel profilering','Mindre endringer i tekst og felter','Små justeringer av standardoppsettet'],hot:true,badge:undefined},
+  {name:'Den eksklusive',price:'Etter avtale',suffix:'basert på behov og omfang',copy:'En eksklusiv løsning som skreddersys og videreutvikles fortløpende, helt ned til detaljene dere ønsker.',points:['Alt i Den fleksible','Fullt skreddersydd arbeidsflate','Løpende endringer etter behov','Egendefinerte prosesser, roller og visninger','Skreddersydde rapporter, mål og prognoser','Integrasjoner mot deres systemer','Prioritert oppfølging'],badge:'Eksklusiv'},
 ];
 
 export default function Home() {
