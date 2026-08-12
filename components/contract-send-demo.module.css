@@ -1,0 +1,96 @@
+.contractDemo button {
+  min-height: 38px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 140ms cubic-bezier(.23, 1, .32, 1);
+}
+
+.contractDemo button:hover:not(:disabled) {
+  background: #ef4d2a;
+  box-shadow: 0 8px 18px rgb(255 91 53 / 24%);
+}
+
+.contractDemo button:active:not(:disabled) {
+  transform: scale(.975);
+}
+
+.contractDemo button:disabled {
+  cursor: default;
+}
+
+.contractDemo[data-state="sent"] button {
+  background: #16865f;
+  box-shadow: 0 8px 20px rgb(22 134 95 / 18%);
+}
+
+.contractDemo[data-state="sent"] > b {
+  color: #16865f;
+}
+
+.buttonContent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  animation: content-in 220ms cubic-bezier(.23, 1, .32, 1) both;
+}
+
+.buttonContent > svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 180ms cubic-bezier(.23, 1, .32, 1);
+}
+
+.contractDemo button:hover:not(:disabled) .buttonContent > svg {
+  transform: translate(2px, -2px);
+}
+
+.spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgb(255 255 255 / 42%);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+
+.check {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 18%);
+  animation: check-in 280ms cubic-bezier(.23, 1, .32, 1) both;
+}
+
+.check svg {
+  width: 11px;
+  height: 11px;
+  stroke-width: 3;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes content-in {
+  from { opacity: 0; transform: translateY(4px); filter: blur(2px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes check-in {
+  from { opacity: 0; transform: scale(.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contractDemo button,
+  .buttonContent,
+  .buttonContent > svg,
+  .spinner,
+  .check {
+    animation: none;
+    transition: none;
+  }
+}
