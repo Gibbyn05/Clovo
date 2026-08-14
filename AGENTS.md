@@ -20,6 +20,10 @@ Use strict TypeScript and React function components. Follow the existing two-spa
 
 Prefer semantic HTML, accessible labels, keyboard-operable controls, and responsive layouts without horizontal scrolling. Keep customer-facing copy in Norwegian unless a route explicitly targets another language. Never place secrets or API keys in source files.
 
+### Icons
+
+Use Phosphor Icons through `@phosphor-icons/react` for all new icons and whenever an existing interface is updated. Import icons individually and choose a consistent weight within each surface, normally `regular` or `bold`. Give decorative icons `aria-hidden="true"`; provide an accessible label when an icon is the only content of an interactive control. Do not introduce new Lucide icons, custom SVG icon sets, or text symbols as icon substitutes. Migrate nearby legacy icons to Phosphor when practical so a component does not mix visual icon styles.
+
 ## Testing Guidelines
 
 No automated test framework is currently configured. For every change, run `npm run build` and manually verify affected routes at desktop and mobile widths. Test form validation, navigation, API error states, and read-only dashboard interactions. If tests are introduced, colocate them as `*.test.ts` or `*.test.tsx` near the code they cover.
