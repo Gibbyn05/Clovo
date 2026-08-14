@@ -6,6 +6,7 @@ import { Footer } from "@/components/ui/modem-animated-footer";
 import { SlideTabsNavigation } from "@/components/ui/slide-tabs-navigation";
 import { SlideUpText } from "@/components/ui/slide-up-text";
 import { ContractSendDemo } from "@/components/contract-send-demo";
+import { HeroDashboard } from "@/components/hero-dashboard";
 
 const DEMO = "/demo";
 
@@ -42,7 +43,7 @@ export default function Home() {
   return <main className={styles.page}>
     <SlideTabsNavigation />
 
-    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><div className={styles.heroBadge}><span>●</span> Bygget for moderne salgsteam</div><h1><SlideUpText lines={[{ text: "Hele salgsarbeidet." }, { text: "Samlet på ett sted.", emphasized: true }]} /></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="#funksjoner"><span className={styles.playIcon}>▶</span> Se hvordan</a></div></div><div className={styles.heroVisual}><div className={styles.visualTopbar}><div><span className={styles.visualLogo}>C</span><b>Clovo</b></div><nav><span className={styles.visualActive}>Pipeline</span><span>Kunder</span><span>Analyse</span></nav><em>Live oversikt</em></div><div className={styles.visualIntro}><div><small>God morgen</small><h2>Salgsoversikt</h2></div><span>Oppdatert nå</span></div><div className={styles.heroMetrics}><div><small>Aktiv pipeline</small><b>925 400 kr</b><span>+12% denne måneden</span></div><div><small>Måloppnåelse</small><b>82%</b><span>6% over forrige måned</span></div><div><small>Åpne avtaler</small><b>18</b><span>5 klare for oppfølging</span></div></div><MiniTable/><div className={styles.floating}><small>Prognose denne måneden</small><b>1 240 000 kr</b><div><span>Basert på pipeline</span><span className={styles.orange}>+18%</span></div></div></div></section>
+    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><div className={styles.heroBadge}><span>●</span> Bygget for moderne salgsteam</div><h1><SlideUpText lines={[{ text: "Hele salgsarbeidet." }, { text: "Samlet på ett sted.", emphasized: true }]} /></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="#funksjoner"><span className={styles.playIcon}>▶</span> Se hvordan</a></div></div><HeroDashboard /></section>
 
     <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div className={styles.trustedViewport}><div className={styles.trustedTrack}>{[false,true].map(copy=><div className={styles.trustedGroup} aria-hidden={copy || undefined} key={String(copy)}><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div>)}</div></div></section>
 
