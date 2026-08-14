@@ -371,28 +371,6 @@
   text-align: center;
 }
 
-.heroBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 25px;
-  padding: 8px 13px;
-  border: 1px solid rgb(24 90 67 / 15%);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 82%);
-  color: #315e4f;
-  box-shadow: 0 8px 24px rgb(38 94 74 / 8%);
-  font-size: 11px;
-  font-weight: 750;
-  backdrop-filter: blur(10px);
-}
-
-.heroBadge span {
-  color: #19a572;
-  font-size: 10px;
-  filter: drop-shadow(0 0 5px rgb(25 165 114 / 45%));
-}
-
 .hero h1 {
   margin-bottom: 22px;
   color: #17201d;
@@ -614,11 +592,6 @@
     gap: 38px;
     border-radius: 24px;
     background-size: 34px 34px;
-  }
-
-  .heroBadge {
-    margin-bottom: 19px;
-    font-size: 10px;
   }
 
   .hero h1 {

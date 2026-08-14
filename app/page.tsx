@@ -43,7 +43,7 @@ export default function Home() {
   return <main className={styles.page}>
     <SlideTabsNavigation />
 
-    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><div className={styles.heroBadge}><span>●</span> Bygget for moderne salgsteam</div><h1><SlideUpText lines={[{ text: "Hele salgsarbeidet." }, { text: "Samlet på ett sted.", emphasized: true }]} /></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="#funksjoner"><span className={styles.playIcon}>▶</span> Se hvordan</a></div></div><HeroDashboard /></section>
+    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><h1><SlideUpText lines={[{ text: "Hele salgsarbeidet." }, { text: "Samlet på ett sted.", emphasized: true }]} /></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="#funksjoner"><span className={styles.playIcon}>▶</span> Se hvordan</a></div></div><HeroDashboard /></section>
 
     <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div className={styles.trustedViewport}><div className={styles.trustedTrack}>{[false,true].map(copy=><div className={styles.trustedGroup} aria-hidden={copy || undefined} key={String(copy)}><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div>)}</div></div></section>
 
