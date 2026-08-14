@@ -12,6 +12,7 @@ const items = [
   { label: "Funksjoner", href: "#funksjoner" },
   { label: "Oppsett", href: "#oppsett" },
   { label: "Priser", href: "#priser" },
+  { label: "Referanser", href: "/referanser" },
   { label: "Kontakt", href: "/kontakt" },
 ];
 
