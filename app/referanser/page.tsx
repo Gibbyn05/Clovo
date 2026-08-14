@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BarChart3, ImageIcon, MessageSquareQuote } from "lucide-react";
+import { ArrowRight, BarChart3, ImageIcon, MessageSquareQuote } from "lucide-react";
 import { referenceCases } from "@/content/references";
+import { SlideTabsNavigation } from "@/components/ui/slide-tabs-navigation";
 import { ReferenceGallery } from "./reference-gallery";
 import styles from "./references.module.css";
 
@@ -13,13 +13,7 @@ export const metadata = {
 export default function ReferencesPage() {
   return (
     <main className={styles.page}>
-      <nav className={styles.nav}>
-        <Link href="/" className={styles.logo} aria-label="Clovo forside">
-          <Image src="/clovo-logo.png" alt="" width={38} height={38} priority />
-          <b>Clovo</b>
-        </Link>
-        <Link href="/" className={styles.back}><ArrowLeft /> Tilbake til forsiden</Link>
-      </nav>
+      <SlideTabsNavigation />
 
       <header className={styles.hero}>
         <span className={styles.kicker}>Referanser og vårt arbeid</span>

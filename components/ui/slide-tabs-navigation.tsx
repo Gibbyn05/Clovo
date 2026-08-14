@@ -8,10 +8,10 @@ import { LiquidMetalButton } from "./liquid-metal-button";
 import styles from "./slide-tabs-navigation.module.css";
 
 const items = [
-  { label: "Hjem", href: "#hjem" },
-  { label: "Funksjoner", href: "#funksjoner" },
-  { label: "Oppsett", href: "#oppsett" },
-  { label: "Priser", href: "#priser" },
+  { label: "Hjem", href: "/#hjem" },
+  { label: "Funksjoner", href: "/#funksjoner" },
+  { label: "Oppsett", href: "/#oppsett" },
+  { label: "Priser", href: "/#priser" },
   { label: "Referanser", href: "/referanser" },
   { label: "Kontakt", href: "/kontakt" },
 ];
@@ -34,8 +34,10 @@ export function SlideTabsNavigation() {
   }
 
   useEffect(() => {
-    const hash = window.location.hash;
-    const initialIndex = Math.max(0, items.findIndex(item => item.href === hash));
+    const currentTarget = window.location.pathname === "/"
+      ? `/${window.location.hash || "#hjem"}`
+      : window.location.pathname;
+    const initialIndex = Math.max(0, items.findIndex(item => item.href === currentTarget));
     setActiveIndex(initialIndex);
     requestAnimationFrame(() => movePill(initialIndex));
 
