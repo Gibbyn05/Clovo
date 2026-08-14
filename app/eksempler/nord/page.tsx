@@ -5,11 +5,20 @@ import { DashboardDemoInteractions } from "@/components/dashboard-demo-interacti
 
 export const metadata = { title: "Nord | Clovo dashboardeksempel", description: "Et redaksjonelt Clovo-dashboard for rådgivende salg og nøkkelkunder." };
 
-export default function NordDashboard() {
-  return <main className={styles.page}>
-    <header><Link href="/" className={styles.brand}><i>C</i><span>Clovo</span></Link><nav><a className={styles.active} aria-pressed="true" data-demo-tab-group="nord-nav" data-demo-action="Oversikt er valgt. Eksempeldataene er skrivebeskyttet.">Oversikt</a><a aria-pressed="false" data-demo-tab-group="nord-nav" data-demo-action="Portefølje er valgt. Eksempeldataene er skrivebeskyttet.">Portefølje</a><a aria-pressed="false" data-demo-tab-group="nord-nav" data-demo-action="Relasjoner er valgt. Eksempeldataene er skrivebeskyttet.">Relasjoner</a><a aria-pressed="false" data-demo-tab-group="nord-nav" data-demo-action="Rapporter er valgt. Eksempeldataene er skrivebeskyttet.">Rapporter</a></nav><div><span>EKSEMPELDATA</span><i>IH</i></div></header>
+const views = {
+  oversikt: { eyebrow: "RÅDGIVENDE SALG · UKE 34", title: "Porteføljen,", emphasis: "i riktig retning.", value: "4 820 000", valueLabel: "Forventet omsetning" },
+  portefolje: { eyebrow: "PORTEFØLJE · 18 NØKKELKUNDER", title: "Verdien ligger,", emphasis: "i relasjonene.", value: "18", valueLabel: "Aktive nøkkelkunder" },
+  relasjoner: { eyebrow: "RELASJONER · SISTE 30 DAGER", title: "Dialogen er,", emphasis: "det viktigste signalet.", value: "84 / 100", valueLabel: "Relasjonshelse" },
+  rapporter: { eyebrow: "RAPPORTER · Q3 2026", title: "Tallene viser,", emphasis: "hvor vi bør gå.", value: "12,6%", valueLabel: "Over prognose" },
+} as const;
 
-    <section className={styles.masthead}><Link href="/" className={styles.back}><ArrowLeft /> Tilbake</Link><div><p>RÅDGIVENDE SALG · UKE 34</p><h1>Porteføljen,<br /><em>i riktig retning.</em></h1></div><aside><span>Forventet omsetning</span><strong>4 820 000</strong><small>NOK · Q3 2026</small><b><ArrowUpRight /> 12,6% over prognose</b></aside></section>
+export default function NordDashboard({ searchParams }: { searchParams?: { view?: string } }) {
+  const viewKey = searchParams?.view && searchParams.view in views ? searchParams.view as keyof typeof views : "oversikt";
+  const view = views[viewKey];
+  return <main className={styles.page}>
+    <header><Link href="/" className={styles.brand}><i>C</i><span>Clovo</span></Link><nav><Link href="/eksempler/nord?view=oversikt" aria-current={viewKey === "oversikt" ? "page" : undefined}>Oversikt</Link><Link href="/eksempler/nord?view=portefolje" aria-current={viewKey === "portefolje" ? "page" : undefined}>Portefølje</Link><Link href="/eksempler/nord?view=relasjoner" aria-current={viewKey === "relasjoner" ? "page" : undefined}>Relasjoner</Link><Link href="/eksempler/nord?view=rapporter" aria-current={viewKey === "rapporter" ? "page" : undefined}>Rapporter</Link></nav><div><span>EKSEMPELDATA</span><i>IH</i></div></header>
+
+    <section className={styles.masthead}><Link href="/" className={styles.back}><ArrowLeft /> Tilbake</Link><div><p>{view.eyebrow}</p><h1>{view.title}<br /><em>{view.emphasis}</em></h1></div><aside><span>{view.valueLabel}</span><strong>{view.value}</strong><small>EKSEMPELDATA · Q3 2026</small><b><ArrowUpRight /> Oppdatert nå</b></aside></section>
 
     <section className={styles.storyGrid}>
       <article className={styles.focus}>

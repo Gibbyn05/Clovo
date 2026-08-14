@@ -10,23 +10,30 @@ const deals = [
   ["Orbit Labs", "Forslag", "126 000", "Sara"], ["Lumen", "Forhandling", "94 000", "Mina"],
 ];
 
-export default function GrowthDashboard() {
+const views = {
+  oversikt: { eyebrow: "MANDAG 17. AUGUST", title: "God morgen, Mina.", subtitle: "Her er det viktigste for vekstteamet denne uken.", metrics: [["Ny MRR","184 500 kr","+18,4% mot forrige måned"],["Åpen pipeline","1,42 mill.","3,2x mål for perioden"],["Konvertering","31,8%","+4,1 prosentpoeng"]] },
+  team: { eyebrow: "TEAM · 12 SELGERE", title: "Teamet leverer foran plan.", subtitle: "Se kapasitet, aktivitet og måloppnåelse per selger.", metrics: [["Aktive selgere","12","10 tilgjengelige nå"],["Bookede møter","38","+7 denne uken"],["Måloppnåelse","84%","6 over individuelt mål"]] },
+  omsetning: { eyebrow: "OMSETNING · AUGUST", title: "Veksten holder farten.", subtitle: "Følg inntekter, prognoser og verdien i salgsarbeidet.", metrics: [["Fakturert","684 500 kr","+21,2% mot juli"],["Prognose","912 000 kr","94% sannsynlighet"],["Snittavtale","58 400 kr","+8 200 kr"]] },
+  innsikt: { eyebrow: "INNSIKT · SISTE 30 DAGER", title: "Tre signaler skiller seg ut.", subtitle: "Demoer konverterer bedre, mens oppfølging bør gå raskere.", metrics: [["Responstid","1t 42m","18 min raskere"],["Vinnrate","31,8%","+4,1 prosentpoeng"],["Salgsfart","19 dager","3 dager raskere"]] },
+} as const;
+
+export default function GrowthDashboard({ searchParams }: { searchParams?: { view?: string } }) {
+  const viewKey = searchParams?.view && searchParams.view in views ? searchParams.view as keyof typeof views : "oversikt";
+  const view = views[viewKey];
   return <main className={styles.page}>
     <aside className={styles.sidebar}>
       <Link href="/" className={styles.mark}>C</Link>
-      <nav aria-label="Dashboardmeny"><a className={styles.active} aria-label="Oversikt" aria-pressed="true" data-demo-tab-group="growth-nav" data-demo-action="Oversikt er valgt. Eksempeldataene er skrivebeskyttet."><LayoutGrid /></a><a aria-label="Team" aria-pressed="false" data-demo-tab-group="growth-nav" data-demo-action="Teamvisningen er valgt. Eksempeldataene er skrivebeskyttet."><Users /></a><a aria-label="Omsetning" aria-pressed="false" data-demo-tab-group="growth-nav" data-demo-action="Omsetningsvisningen er valgt. Eksempeldataene er skrivebeskyttet."><CircleDollarSign /></a><a aria-label="Innsikt" aria-pressed="false" data-demo-tab-group="growth-nav" data-demo-action="Innsiktsvisningen er valgt. Eksempeldataene er skrivebeskyttet."><Sparkles /></a></nav>
+      <nav aria-label="Dashboardmeny"><Link href="/eksempler/vekst?view=oversikt" aria-label="Oversikt" aria-current={viewKey === "oversikt" ? "page" : undefined}><LayoutGrid /></Link><Link href="/eksempler/vekst?view=team" aria-label="Team" aria-current={viewKey === "team" ? "page" : undefined}><Users /></Link><Link href="/eksempler/vekst?view=omsetning" aria-label="Omsetning" aria-current={viewKey === "omsetning" ? "page" : undefined}><CircleDollarSign /></Link><Link href="/eksempler/vekst?view=innsikt" aria-label="Innsikt" aria-current={viewKey === "innsikt" ? "page" : undefined}><Sparkles /></Link></nav>
       <a className={styles.settings} aria-label="Innstillinger" data-demo-action="Skrivebeskyttet: innstillinger kan ikke endres i eksempelvisningen."><Settings2 /></a>
     </aside>
 
     <section className={styles.workspace}>
       <header><div><Link href="/" className={styles.back}><ArrowLeft /> Clovo</Link><span>Eksempeldata</span></div><button className={styles.search} data-demo-action="Søket er tilgjengelig i kundeløsningen. Eksempeldataene kan ikke endres."><Search /><span>Søk i kunder og avtaler</span><kbd>⌘ K</kbd></button><button aria-label="Varsler" data-demo-action="Ingen nye varsler i eksempelvisningen."><Bell /></button><i>MN</i></header>
 
-      <div className={styles.intro}><div><p>MANDAG 17. AUGUST</p><h1>God morgen, Mina.</h1><span>Her er det viktigste for vekstteamet denne uken.</span></div><button data-demo-action="Periodevelgeren er åpnet i skrivebeskyttet demomodus.">Uke 34 <ChevronDown /></button></div>
+      <div className={styles.intro}><div><p>{view.eyebrow}</p><h1>{view.title}</h1><span>{view.subtitle}</span></div><button data-demo-action="Periodevelgeren er åpnet i skrivebeskyttet demomodus.">Uke 34 <ChevronDown /></button></div>
 
       <section className={styles.metrics}>
-        <article><span>Ny MRR</span><strong>184 500 kr</strong><small><b>+18,4%</b> mot forrige måned</small></article>
-        <article><span>Åpen pipeline</span><strong>1,42 mill.</strong><small><b>3,2x</b> mål for perioden</small></article>
-        <article><span>Konvertering</span><strong>31,8%</strong><small><b>+4,1</b> prosentpoeng</small></article>
+        {view.metrics.map(metric => <article key={metric[0]}><span>{metric[0]}</span><strong>{metric[1]}</strong><small>{metric[2]}</small></article>)}
         <article className={styles.goal}><span>Kvartalsmål</span><strong>72%</strong><div><i /></div><small>504 000 av 700 000 kr</small></article>
       </section>
 

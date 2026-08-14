@@ -10,15 +10,23 @@ const agents = [
   ["SK", "Sander K.", "Ledig", "00:36", "21"], ["NE", "Nora E.", "I samtale", "08:05", "17"],
 ];
 
-export default function PulseDashboard() {
+const views = {
+  live: { eyebrow: "COMMAND CENTER / OSLO / 14:32:08", title: "SALGSPULS", metrics: [["AKTIVE SAMTALER","08","6 innkommende · 2 utgående"],["VENTER I KØ","03","Lengste ventetid 01:24"],["DAGENS SALG","71","88% av dagsmål"]] },
+  team: { eyebrow: "TEAM STATUS / 12 PÅLOGGET", title: "TEAMFLOW", metrics: [["I SAMTALE","08","67% av kapasiteten"],["TILGJENGELIGE","03","Neste agent om 00:36"],["MØTER BOOKET","38","+18,7% i dag"]] },
+  ko: { eyebrow: "KØOVERSIKT / OPPDATERT NÅ", title: "KØPULS", metrics: [["VENTER NÅ","03","Lengste ventetid 01:24"],["SVARTID","00:42","12 sek foran målet"],["BESVART I DAG","146","94% svargrad"]] },
+} as const;
+
+export default function PulseDashboard({ searchParams }: { searchParams?: { view?: string } }) {
+  const viewKey = searchParams?.view && searchParams.view in views ? searchParams.view as keyof typeof views : "live";
+  const view = views[viewKey];
   return <main className={styles.page}>
-    <header><Link href="/" className={styles.logo}><span>C/</span>PULS</Link><nav><a className={styles.active} aria-pressed="true" data-demo-tab-group="pulse-nav" data-demo-action="LIVE-visningen er valgt. Dataene oppdateres kun visuelt i demoen."><Activity />LIVE</a><a aria-pressed="false" data-demo-tab-group="pulse-nav" data-demo-action="TEAM-visningen er valgt. Eksempeldataene er skrivebeskyttet."><UsersRound />TEAM</a><a aria-pressed="false" data-demo-tab-group="pulse-nav" data-demo-action="KØ-visningen er valgt. Eksempeldataene er skrivebeskyttet."><Headphones />KØ</a></nav><div><i><Radio /> LIVE</i><button aria-label="Varsler" data-demo-action="Tre systemsignaler vises lenger ned på siden."><BellRing /></button><button aria-label="Innstillinger" data-demo-action="Skrivebeskyttet: innstillinger kan ikke endres i eksempelvisningen."><Settings /></button><span>EKSEMPELDATA</span></div></header>
+    <header><Link href="/" className={styles.logo}><span>C/</span>PULS</Link><nav><Link href="/eksempler/puls?view=live" aria-current={viewKey === "live" ? "page" : undefined}><Activity />LIVE</Link><Link href="/eksempler/puls?view=team" aria-current={viewKey === "team" ? "page" : undefined}><UsersRound />TEAM</Link><Link href="/eksempler/puls?view=ko" aria-current={viewKey === "ko" ? "page" : undefined}><Headphones />KØ</Link></nav><div><i><Radio /> LIVE</i><button aria-label="Varsler" data-demo-action="Tre systemsignaler vises lenger ned på siden."><BellRing /></button><button aria-label="Innstillinger" data-demo-action="Skrivebeskyttet: innstillinger kan ikke endres i eksempelvisningen."><Settings /></button><span>EKSEMPELDATA</span></div></header>
 
     <section className={styles.command}>
-      <div className={styles.title}><Link href="/"><ArrowLeft /> TILBAKE</Link><p>COMMAND CENTER / OSLO / 14:32:08</p><h1>SALGS<span>PULS</span></h1></div>
-      <div className={styles.liveMetric}><span>AKTIVE SAMTALER</span><strong>08</strong><small><i /> 6 innkommende · 2 utgående</small></div>
-      <div className={styles.liveMetric}><span>VENTER I KØ</span><strong>03</strong><small>Lengste ventetid 01:24</small></div>
-      <div className={styles.liveMetricAccent}><span>DAGENS SALG</span><strong>71</strong><small><Zap /> 88% av dagsmål</small></div>
+      <div className={styles.title}><Link href="/"><ArrowLeft /> TILBAKE</Link><p>{view.eyebrow}</p><h1>{view.title.slice(0,-4)}<span>{view.title.slice(-4)}</span></h1></div>
+      <div className={styles.liveMetric}><span>{view.metrics[0][0]}</span><strong>{view.metrics[0][1]}</strong><small><i /> {view.metrics[0][2]}</small></div>
+      <div className={styles.liveMetric}><span>{view.metrics[1][0]}</span><strong>{view.metrics[1][1]}</strong><small>{view.metrics[1][2]}</small></div>
+      <div className={styles.liveMetricAccent}><span>{view.metrics[2][0]}</span><strong>{view.metrics[2][1]}</strong><small><Zap /> {view.metrics[2][2]}</small></div>
     </section>
 
     <section className={styles.grid}>
