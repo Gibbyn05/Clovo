@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BarChart3, ImageIcon, MessageSquareQuote } from "lucide-react";
 import { referenceCases } from "@/content/references";
+import { ReferenceGallery } from "./reference-gallery";
 import styles from "./references.module.css";
 
 export const metadata = {
@@ -28,7 +29,7 @@ export default function ReferencesPage() {
 
       {referenceCases.length > 0 ? (
         <section className={styles.cases} aria-label="Kundecaser">
-          {referenceCases.map((reference, index) => (
+          {referenceCases.map(reference => (
             <article className={styles.case} key={reference.slug}>
               <div className={styles.caseCopy}>
                 <div className={styles.caseMeta}><span>{reference.company}</span><i />{reference.industry}</div>
@@ -50,13 +51,7 @@ export default function ReferencesPage() {
                 )}
               </div>
 
-              <div className={styles.gallery}>
-                {reference.dashboardImages.map((image, imageIndex) => (
-                  <figure className={imageIndex === 0 ? styles.primaryImage : styles.secondaryImage} key={image.src}>
-                    <Image src={image.src} alt={image.alt} fill sizes={index === 0 ? "(max-width: 800px) 100vw, 55vw" : "(max-width: 800px) 100vw, 45vw"} />
-                  </figure>
-                ))}
-              </div>
+              <ReferenceGallery images={reference.dashboardImages} />
             </article>
           ))}
         </section>
