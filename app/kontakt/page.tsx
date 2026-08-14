@@ -1,6 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft, Clock3, Mail, MessageSquareText, ShieldCheck } from "lucide-react";
+import { Clock3, Mail, MessageSquareText, ShieldCheck } from "lucide-react";
+import { SlideTabsNavigation } from "@/components/ui/slide-tabs-navigation";
 import { ContactForm } from "./contact-form";
 import styles from "./contact.module.css";
 
@@ -11,10 +10,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return <main className={styles.page}>
-    <nav className={styles.nav}>
-      <Link href="/" className={styles.logo}><Image src="/clovo-logo.png" alt="" width={38} height={38} priority/><b>Clovo</b></Link>
-      <Link href="/" className={styles.back}><ArrowLeft/> Tilbake til forsiden</Link>
-    </nav>
+    <SlideTabsNavigation />
 
     <section className={styles.shell}>
       <aside className={styles.intro}>
