@@ -41,11 +41,13 @@ export default function ReferencesPage() {
                   </dl>
                 )}
 
-                <blockquote>
-                  <MessageSquareQuote aria-hidden="true" />
-                  <p>“{reference.quote.text}”</p>
-                  <footer><b>{reference.quote.name}</b><span>{reference.quote.role}, {reference.company}</span></footer>
-                </blockquote>
+                {reference.quote && (
+                  <blockquote>
+                    <MessageSquareQuote aria-hidden="true" />
+                    <p>“{reference.quote.text}”</p>
+                    <footer><b>{reference.quote.name}</b><span>{reference.quote.role}, {reference.company}</span></footer>
+                  </blockquote>
+                )}
               </div>
 
               <div className={styles.gallery}>
