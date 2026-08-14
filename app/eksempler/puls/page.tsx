@@ -16,6 +16,11 @@ const views = {
   ko: { eyebrow: "KØOVERSIKT / OPPDATERT NÅ", title: "KØPULS", metrics: [["VENTER NÅ","03","Lengste ventetid 01:24"],["SVARTID","00:42","12 sek foran målet"],["BESVART I DAG","146","94% svargrad"]] },
 } as const;
 
+function PulseSubView({ view }: { view: "team" | "ko" }) {
+  if (view === "team") return <section className={styles.teamOps}><article className={styles.teamWall}><div className={styles.cardTop}><span>TEAM / SANNTIDSSTATUS</span><b>12 PÅLOGGET</b></div>{agents.concat([["JR","Jon R.","Pause","05:00","12"],["LM","Linn M.","I samtale","06:42","16"]]).map((agent,i)=><div className={styles.teamAgent} key={agent[0]}><span><i>{agent[0]}</i><b>{agent[1]}</b></span><em data-state={i%4}>{agent[2]}</em><div><i style={{width:`${55+i*7}%`}}/></div><strong>{agent[4]}<small>SALG</small></strong></div>)}</article><article className={styles.leaderboard}><div className={styles.cardTop}><span>TOPP 3 / I DAG</span><Zap /></div>{[["01","Sander K.","21"],["02","Amalie L.","18"],["03","Nora E.","17"]].map(x=><p key={x[0]}><i>{x[0]}</i><b>{x[1]}</b><strong>{x[2]}</strong></p>)}</article><article className={styles.teamCapacity}><div className={styles.cardTop}><span>KAPASITET</span><b>67%</b></div><div className={styles.capacityDial}><strong>08</strong><span>I SAMTALE</span></div><p><i/> 3 tilgjengelige</p><p><i/> 1 i etterarbeid</p></article><article className={styles.coachSignals}><div className={styles.cardTop}><span>COACHING-SIGNALER</span><Activity /></div><p><b>SK</b><span>Sander har høy aktivitet, men lavere møtekvalitet.</span><em>SE NÆRMERE</em></p><p><b>TM</b><span>Tobias bruker 34% mer tid på etterarbeid.</span><em>FØLG OPP</em></p></article></section>;
+  return <section className={styles.queueOps}><article className={styles.queueFlow}><div className={styles.cardTop}><span>LIVE KØ / 3 VENTER</span><b>SVARGRAD 94%</b></div><div className={styles.queueLane}><span>INNKOMMENDE</span>{[["00:18","INBOUND WEB","HØY"],["00:51","PARTNER","NORMAL"],["01:24","REAKTIVERING","KRITISK"]].map((x,i)=><div key={x[0]} data-wait={i}><strong>{x[0]}</strong><b>{x[1]}</b><em>{x[2]}</em><i>→</i></div>)}</div><div className={styles.queueAgents}><span>NESTE LEDIGE</span>{[["SK","00:36"],["TM","01:12"],["AL","02:04"]].map(x=><p key={x[0]}><i>{x[0]}</i><b>{x[1]}</b></p>)}</div></article><article className={styles.serviceLevel}><div className={styles.cardTop}><span>SERVICENIVÅ</span><b>MÅL 90%</b></div><strong>87%</strong><div><i/></div><p>3 prosentpoeng under målet</p></article><article className={styles.hourlyQueue}><div className={styles.cardTop}><span>VENTETID / SISTE 8 TIMER</span><b>SNITT 00:42</b></div><div>{[26,38,54,31,72,46,59,84].map((x,i)=><i key={i} style={{height:`${x}%`}}><span>{8+i}</span></i>)}</div></article><article className={styles.routing}><div className={styles.cardTop}><span>RUTING</span><Settings /></div>{[["Inbound web","Team A","12 sek"],["Partner","Senior","28 sek"],["Reaktivering","Team B","54 sek"]].map(x=><p key={x[0]}><b>{x[0]}</b><span>{x[1]}</span><em>{x[2]}</em></p>)}</article></section>;
+}
+
 export default function PulseDashboard({ searchParams }: { searchParams?: { view?: string } }) {
   const viewKey = searchParams?.view && searchParams.view in views ? searchParams.view as keyof typeof views : "live";
   const view = views[viewKey];
@@ -29,7 +34,7 @@ export default function PulseDashboard({ searchParams }: { searchParams?: { view
       <div className={styles.liveMetricAccent}><span>{view.metrics[2][0]}</span><strong>{view.metrics[2][1]}</strong><small><Zap /> {view.metrics[2][2]}</small></div>
     </section>
 
-    <section className={styles.grid}>
+    {viewKey === "live" ? <section className={styles.grid}>
       <article className={styles.wave}>
         <div className={styles.cardTop}><span><Signal /> AKTIVITET / SISTE 60 MIN</span><b>+18.7%</b></div>
         <div className={styles.waveform}>{Array.from({length:48},(_,i)=><i key={i} style={{height:`${18+((i*17)%67)}%`}} className={i>38?styles.hot:""}/>)}</div>
@@ -53,7 +58,7 @@ export default function PulseDashboard({ searchParams }: { searchParams?: { view
       </article>
 
       <article className={styles.alerts}><div className={styles.cardTop}><span>SYSTEMSIGNALER</span><Activity /></div><div><i className={styles.warn}>!</i><span><b>Køen øker</b><small>3 leads har ventet over 60 sek</small></span><time>14:31</time></div><div><i className={styles.good}>✓</i><span><b>Dagsmål nærmer seg</b><small>Teamet ligger 11% foran plan</small></span><time>14:28</time></div><div><i className={styles.info}>i</i><span><b>Ny toppscore</b><small>Sander har 21 salg i dag</small></span><time>14:22</time></div></article>
-    </section>
+    </section> : <PulseSubView view={viewKey} />}
 
     <footer><span><i /> SYSTEM ONLINE</span><p>CLV-PULSE / REALTIME SALES OPERATIONS</p><span><PhoneCall /> 8 AKTIVE</span></footer>
     <DashboardDemoInteractions theme="pulse" />
