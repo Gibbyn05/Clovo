@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, ClipboardCheck, Database, FileCheck2, LockKeyhole, MessagesSquare, Rocket, ShieldCheck } from "lucide-react";
 import styles from "./landing-decision-sections.module.css";
+import exampleStyles from "./dashboard-examples.module.css";
 
 const comparisonRows = [
   ["Oppsett", "Et generelt system som teamet må tilpasse seg", "En arbeidsflate bygget rundt teamets salgsprosess"],
@@ -30,6 +31,18 @@ export function AfterBookingProcess() {
     <div className={styles.heading}><span>Fra henvendelse til arbeidsflate</span><h2>Dette skjer etter at du bestiller demo.</h2><p>En tydelig prosess før dere bestemmer dere, med avklarte behov og forventninger.</p></div>
     <div className={styles.processGrid}>{steps.map(step => { const StepIcon = step.icon; return <article key={step.number}><div className={styles.stepTop}><i><StepIcon /></i><span>{step.number}</span></div><h3>{step.title}</h3><p>{step.text}</p></article>; })}</div>
     <div className={styles.inlineActions}><Link href="/demo" className={styles.primary}>Bestill demo <ArrowRight /></Link><Link href="/kontakt" className={styles.secondary}>Still et spørsmål</Link></div>
+  </section>;
+}
+
+export function DashboardExamples() {
+  const examples = [
+    { href: "/eksempler/vekst", number: "01", name: "Vekst", type: "SaaS og abonnement", metric: "1,42 mill.", label: "åpen pipeline", className: exampleStyles.exampleGrowth },
+    { href: "/eksempler/nord", number: "02", name: "Nord", type: "Rådgivende salg", metric: "84 / 100", label: "relasjonshelse", className: exampleStyles.exampleNord },
+    { href: "/eksempler/puls", number: "03", name: "Puls", type: "Telefonsalg og aktivitet", metric: "08 live", label: "aktive samtaler", className: exampleStyles.examplePulse },
+  ];
+  return <section className={exampleStyles.examples}>
+    <div className={exampleStyles.examplesHeading}><div><span>Tre ulike arbeidsflater</span><h2>Samme plattform.<br />Helt forskjellig uttrykk.</h2></div><p>Åpne tre separate dashboardeksempler med ulik data, struktur, typografi, farger og informasjonsflyt. All informasjon er eksempeldata.</p></div>
+    <div className={exampleStyles.exampleGrid}>{examples.map(example => <Link href={example.href} className={`${exampleStyles.exampleCard} ${example.className}`} key={example.href}><div className={exampleStyles.exampleTop}><span>{example.number} / EKSEMPEL</span><ArrowRight /></div><div className={exampleStyles.exampleMock}><i /><i /><i /><b>{example.metric}</b><small>{example.label}</small><div><span /><span /><span /><span /><span /></div></div><footer><div><span>{example.type}</span><h3>{example.name}</h3></div><b>Åpne dashboard <ArrowRight /></b></footer></Link>)}</div>
   </section>;
 }
 

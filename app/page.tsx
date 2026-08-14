@@ -7,7 +7,7 @@ import { SlideTabsNavigation } from "@/components/ui/slide-tabs-navigation";
 import { SlideUpText } from "@/components/ui/slide-up-text";
 import { ContractSendDemo } from "@/components/contract-send-demo";
 import { HeroDashboard } from "@/components/hero-dashboard";
-import { AfterBookingProcess, FinalDecisionCta, LandingFaq, TrustAndComparison } from "@/components/landing-decision-sections";
+import { AfterBookingProcess, DashboardExamples, FinalDecisionCta, LandingFaq, TrustAndComparison } from "@/components/landing-decision-sections";
 
 const DEMO = "/demo";
 
@@ -49,6 +49,8 @@ export default function Home() {
     <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div className={styles.trustedViewport}><div className={styles.trustedTrack}>{[false,true].map(copy=><div className={styles.trustedGroup} aria-hidden={copy || undefined} key={String(copy)}><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div>)}</div></div></section>
 
     <Features />
+
+    <DashboardExamples />
 
     <section className={styles.section}><div className={styles.heading}><h2>Smarte funksjoner. Bedre salg.</h2><p>Følg aktivitet, fremdrift og resultater uten å miste oversikten.</p></div><div className={styles.smartGrid}><article className={styles.performance}><h3>Resultater i sanntid</h3><p>Se utvikling, måloppnåelse og nøkkeltall per selger.</p><div className={styles.metricRow}><div><small>Vunnet denne måneden</small><b>284 500 kr</b></div><div><small>Måloppnåelse</small><b>82%</b></div></div><div className={styles.lineChart}><AnimatedAreaChart /></div></article><article className={styles.community}><h3>Teamets arbeidsflate</h3><p>Roller og tilgang gir alle akkurat den oversikten de trenger.</p>{['Selger','Salgsleder','Daglig leder'].map((x,i)=><div className={styles.person} key={x}><i>{x[0]}</i><span><b>{x}</b><small>{i===0?'Egne kunder og salg':i===1?'Hele teamets pipeline':'Overordnet innsikt'}</small></span><em>•••</em></div>)}</article><article><h3>Pipeline-fremdrift</h3><p>Følg hvert salg fra første kontakt til signert avtale.</p><MiniTable compact/></article><article><h3>Kontrakter og signering</h3><p>Hold avtaler, dokumenter og neste steg samlet.</p><ContractSendDemo /></article><article className={styles.insight}><h3>Innsikt som kan brukes</h3><p>Se hva som driver salget og hvor prosessen stopper opp.</p><div className={styles.kpis}><b>15<small>aktive salg</small></b><b>20<small>oppgaver</small></b><b>82%<small>måloppnåelse</small></b></div></article></div><div className={styles.center}><Button metal/></div></section>
 
