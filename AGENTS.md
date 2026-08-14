@@ -24,6 +24,10 @@ Prefer semantic HTML, accessible labels, keyboard-operable controls, and respons
 
 Use Phosphor Icons through `@phosphor-icons/react` for all new icons and whenever an existing interface is updated. Import icons individually and choose a consistent weight within each surface, normally `regular` or `bold`. Give decorative icons `aria-hidden="true"`; provide an accessible label when an icon is the only content of an interactive control. Do not introduce new Lucide icons, custom SVG icon sets, or text symbols as icon substitutes. Migrate nearby legacy icons to Phosphor when practical so a component does not mix visual icon styles.
 
+### Landing Page Assets
+
+Store generated landing-page illustrations in `assets/landing/` using descriptive kebab-case filenames. Use `next/image` with explicit dimensions or a stable aspect ratio, responsive `sizes`, and meaningful Norwegian alternative text. Keep all illustrations within the established Clovo palette and visual system. Generated assets must not contain embedded text, logos, watermarks, fake interface labels, or generic stock-photo compositions. Prefer transparent or warm neutral backgrounds. Do not replace useful product UI or interactive demonstrations with decorative imagery.
+
 ## Testing Guidelines
 
 No automated test framework is currently configured. For every change, run `npm run build` and manually verify affected routes at desktop and mobile widths. Test form validation, navigation, API error states, and read-only dashboard interactions. If tests are introduced, colocate them as `*.test.ts` or `*.test.tsx` near the code they cover.

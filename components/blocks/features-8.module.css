@@ -177,3 +177,6 @@
 /* Product UI stays framed. Supporting content is deliberately more open. */
 .intro{max-width:760px;text-align:left;margin-left:0}.intro h2{font-size:clamp(34px,4.6vw,58px);line-height:.98;letter-spacing:-.055em}.intro p{max-width:590px;margin-left:0;font-size:13px}.grid{gap:0;border-block:1px solid #e6ebe8}.card{border:0;border-radius:0;border-bottom:1px solid #e6ebe8;background:transparent;box-shadow:none}.card:nth-child(even){border-left:1px solid #e6ebe8}.dashboard{background:#f7faf8}.card:hover{box-shadow:none!important}.icon{border:0;background:#eef4f1;color:#ff5b35}.contractVisual,.isolationVisual span{background:#fff}
 @media(max-width:850px){.intro{text-align:left}.card:nth-child(even){border-left:0}.grid{border-bottom:0}.dashboard{border-radius:18px}.card{padding-inline:20px}}
+
+.illustration{position:absolute;inset:92px 14px 10px;overflow:hidden}.illustration img{object-fit:cover;object-position:center}.illustrationContain img{object-fit:contain}.contractComposition{position:absolute;inset:86px 18px 14px}.contractComposition>.illustration{inset:0 0 48px;opacity:.42}.contractComposition .contractVisual{left:8px;right:8px;bottom:0;z-index:2;background:rgb(255 255 255 / 92%);backdrop-filter:blur(8px);box-shadow:0 14px 35px rgb(23 34 30 / 12%)}
+@media(max-width:850px){.illustration{inset:86px 8px 8px}.contractComposition{inset:82px 10px 10px}}
