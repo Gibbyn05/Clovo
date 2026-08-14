@@ -86,9 +86,8 @@ export function Features() {
   return (
     <section ref={root} id="funksjoner" className={`${styles.section} ${visible ? styles.visible : ""}`}>
       <div className={styles.intro}>
-        <span>Funksjoner</span>
-        <h2>Alt salgsarbeidet. Én tilpasset arbeidsflate.</h2>
-        <p>Clovo samler verktøyene teamet bruker hver dag, uten å presse arbeidsflyten inn i en standardmal.</p>
+        <h2>Arbeidsflaten følger salget, ikke omvendt.</h2>
+        <p>Fra første kontakt til signert avtale ser teamet bare informasjonen som trengs for å ta neste steg.</p>
       </div>
       <div className={styles.grid}>
         {features.map((feature,index)=><article className={`${styles.card} ${styles[feature.kind]}`} style={{"--delay":`${index*65}ms`} as React.CSSProperties} key={feature.title}>

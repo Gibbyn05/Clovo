@@ -28,28 +28,27 @@ export function AfterBookingProcess() {
   ];
 
   return <section className={styles.process} id="oppsett">
-    <div className={styles.heading}><span>Fra henvendelse til arbeidsflate</span><h2>Dette skjer etter at du bestiller demo.</h2><p>En tydelig prosess før dere bestemmer dere, med avklarte behov og forventninger.</p></div>
+    <div className={styles.heading}><h2>Fra behov til en arbeidsflate teamet kan bruke.</h2><p>Dere vet hva som skal leveres, når det skal være klart og hva det vil kreve før arbeidet starter.</p></div>
     <div className={styles.processGrid}>{steps.map(step => { const StepIcon = step.icon; return <article key={step.number}><div className={styles.stepTop}><i><StepIcon /></i><span>{step.number}</span></div><h3>{step.title}</h3><p>{step.text}</p></article>; })}</div>
-    <div className={styles.inlineActions}><Link href="/demo" className={styles.primary}>Bestill demo <ArrowRight /></Link><Link href="/kontakt" className={styles.secondary}>Still et spørsmål</Link></div>
   </section>;
 }
 
 export function DashboardExamples() {
   const examples = [
-    { href: "/eksempler/vekst", number: "01", name: "Vekst", type: "SaaS og abonnement", metric: "1,42 mill.", label: "åpen pipeline", className: exampleStyles.exampleGrowth },
-    { href: "/eksempler/nord", number: "02", name: "Nord", type: "Rådgivende salg", metric: "84 / 100", label: "relasjonshelse", className: exampleStyles.exampleNord },
-    { href: "/eksempler/puls", number: "03", name: "Puls", type: "Telefonsalg og aktivitet", metric: "08 live", label: "aktive samtaler", className: exampleStyles.examplePulse },
+    { href: "/eksempler/vekst", name: "Vekst", type: "SaaS og abonnement", metric: "1,42 mill.", label: "åpen pipeline", className: exampleStyles.exampleGrowth },
+    { href: "/eksempler/nord", name: "Nord", type: "Rådgivende salg", metric: "84 / 100", label: "relasjonshelse", className: exampleStyles.exampleNord },
+    { href: "/eksempler/puls", name: "Puls", type: "Telefonsalg og aktivitet", metric: "08 live", label: "aktive samtaler", className: exampleStyles.examplePulse },
   ];
-  return <section className={exampleStyles.examples}>
-    <div className={exampleStyles.examplesHeading}><div><span>Tre ulike arbeidsflater</span><h2>Samme plattform.<br />Helt forskjellig uttrykk.</h2></div><p>Åpne tre separate dashboardeksempler med ulik data, struktur, typografi, farger og informasjonsflyt. All informasjon er eksempeldata.</p></div>
-    <div className={exampleStyles.exampleGrid}>{examples.map(example => <Link href={example.href} className={`${exampleStyles.exampleCard} ${example.className}`} key={example.href}><div className={exampleStyles.exampleTop}><span>{example.number} / EKSEMPEL</span><ArrowRight /></div><div className={exampleStyles.exampleMock}><i /><i /><i /><b>{example.metric}</b><small>{example.label}</small><div><span /><span /><span /><span /><span /></div></div><footer><div><span>{example.type}</span><h3>{example.name}</h3></div><b>Åpne dashboard <ArrowRight /></b></footer></Link>)}</div>
+  return <section className={exampleStyles.examples} id="eksempler">
+    <div className={exampleStyles.examplesHeading}><div><h2>Tre salgsteam.<br />Tre forskjellige behov.</h2></div><p>Se hvordan struktur, nøkkeltall og prioriteringer endres mellom abonnementssalg, rådgivende salg og høy aktivitet. All informasjon er eksempeldata.</p></div>
+    <div className={exampleStyles.exampleGrid}>{examples.map(example => <Link href={example.href} className={`${exampleStyles.exampleCard} ${example.className}`} key={example.href}><div className={exampleStyles.exampleTop}><span>{example.type}</span><ArrowRight /></div><div className={exampleStyles.exampleMock}><i /><i /><i /><b>{example.metric}</b><small>{example.label}</small><div><span /><span /><span /><span /><span /></div></div><footer><div><h3>{example.name}</h3></div><b>Utforsk <ArrowRight /></b></footer></Link>)}</div>
   </section>;
 }
 
 export function TrustAndComparison() {
   return <>
     <section className={styles.comparison}>
-      <div className={styles.comparisonIntro}><span>Hvorfor Clovo</span><h2>Mindre system.<br />Mer salgsflyt.</h2><p>Clovo er laget for team som vil ha en relevant arbeidsflate, ikke et omfattende standardsystem som må formes på egen hånd.</p><Link href="/referanser">Se vårt arbeid <ArrowRight /></Link></div>
+      <div className={styles.comparisonIntro}><h2>Mindre system.<br />Mer salgsflyt.</h2><p>Clovo er laget for team som vil følge opp salg, ikke administrere et omfattende standardsystem.</p><Link href="/referanser">Se vårt arbeid <ArrowRight /></Link></div>
       <div className={styles.comparisonTable} role="table" aria-label="Forskjellen mellom et standard CRM og Clovo">
         <div className={styles.tableHeader} role="row"><span role="columnheader">Område</span><b role="columnheader">Typisk standard-CRM</b><b role="columnheader">Clovo</b></div>
         {comparisonRows.map(row => <div className={styles.comparisonRow} role="row" key={row[0]}><span role="cell">{row[0]}</span><p role="cell">{row[1]}</p><p role="cell"><Check />{row[2]}</p></div>)}
@@ -57,7 +56,7 @@ export function TrustAndComparison() {
     </section>
 
     <section className={styles.security}>
-      <div className={styles.securityTitle}><span><ShieldCheck /> Sikkerhet og databehandling</span><h2>Tydelige rammer før data flyttes.</h2><p>Vi beskriver bare sikkerhetstiltak som gjelder for nettsiden nå. Krav til selve kundeløsningen avklares ut fra data, integrasjoner og valgt oppsett.</p></div>
+      <div className={styles.securityTitle}><h2>Før data flyttes, avklarer vi rammene.</h2><p>Databehov, tilgang, import og nødvendige avtaler avklares før en kundeløsning settes opp.</p></div>
       <div className={styles.securityGrid}>
         <article><i><LockKeyhole /></i><div><h3>Kryptert forbindelse</h3><p>Produksjonssiden bruker HTTPS, slik at informasjon i skjemaer sendes over en kryptert forbindelse.</p></div></article>
         <article><i><Database /></i><div><h3>Begrenset formål</h3><p>Opplysninger fra skjemaene brukes til å behandle henvendelsen og forberede videre oppfølging.</p></div></article>
@@ -70,11 +69,7 @@ export function TrustAndComparison() {
 
 export function LandingFaq() {
   return <section className={styles.faq}>
-    <div className={styles.faqIntro}><span>Ofte stilte spørsmål</span><h2>Det viktigste før dere går videre.</h2><p>Konkrete svar om oppsett, tilpasning, pris og hva som skjer etter henvendelsen.</p><Link href="/kontakt">Har du et annet spørsmål? <ArrowRight /></Link></div>
+    <div className={styles.faqIntro}><h2>Det viktigste før dere går videre.</h2><p>Svar om oppsett, tilpasning, pris og hva som skjer etter henvendelsen.</p><Link href="/kontakt">Har du et annet spørsmål? <ArrowRight /></Link></div>
     <div className={styles.questions}>{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div>
   </section>;
-}
-
-export function FinalDecisionCta() {
-  return <section className={styles.finalCta}><div><span>Neste steg</span><h2>Se om Clovo passer salgsprosessen deres.</h2><p>Fortell oss hvordan teamet jobber i dag. Dere får en konkret gjennomgang, ikke en generell salgspresentasjon.</p></div><div className={styles.ctaActions}><Link href="/demo" className={styles.primary}>Bestill demo <ArrowRight /></Link><Link href="/referanser" className={styles.light}>Se kundecase</Link></div></section>;
 }

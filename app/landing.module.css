@@ -663,3 +663,7 @@
 .subscribe input::placeholder{color:#8b8989;opacity:1}
 .subscribe button{background:#ff5b35;font-weight:750;box-shadow:0 8px 18px rgba(255,91,53,.24)}
 .exclusive{position:absolute;right:15px;top:15px;padding:4px 9px;border:1px solid #ffb9a8;border-radius:10px;background:#fff3ef;color:#e64925;font-size:8px;font-weight:750;letter-spacing:.04em;text-transform:uppercase}
+
+/* Editorial landing-page pass: one clear flow and one primary action. */
+.productFlow{width:min(1120px,calc(100% - 48px));margin:12px auto 76px;padding:22px 0;display:flex;align-items:center;justify-content:center;gap:24px;border-block:1px solid #e7ece9;color:#69736f;font-size:12px;font-weight:750;letter-spacing:.02em}.productFlow svg{width:15px;color:#b4bdb9}.productFlow strong{color:#ff5b35}.button,.paleButton{border-radius:10px;box-shadow:0 10px 24px rgb(255 91 53 / 20%)}.button svg,.paleButton svg,.learn span{transition:transform 180ms ease}.button:hover svg,.paleButton:hover svg,.learn:hover span{transform:translateX(3px)}
+@media(max-width:600px){.productFlow{width:calc(100% - 32px);margin-bottom:54px;gap:10px;justify-content:space-between;font-size:9px}.productFlow svg{width:11px}.heroCopy>p{font-size:14px}}

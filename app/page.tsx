@@ -1,13 +1,10 @@
 import styles from "./landing.module.css";
-import { AnimatedAreaChart } from "@/components/animated-area-chart";
 import { Features } from "@/components/blocks/features-8";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { Footer } from "@/components/ui/modem-animated-footer";
 import { SlideTabsNavigation } from "@/components/ui/slide-tabs-navigation";
 import { SlideUpText } from "@/components/ui/slide-up-text";
-import { ContractSendDemo } from "@/components/contract-send-demo";
 import { HeroDashboard } from "@/components/hero-dashboard";
-import { AfterBookingProcess, DashboardExamples, FinalDecisionCta, LandingFaq, TrustAndComparison } from "@/components/landing-decision-sections";
+import { AfterBookingProcess, DashboardExamples, LandingFaq, TrustAndComparison } from "@/components/landing-decision-sections";
 
 const DEMO = "/demo";
 
@@ -23,15 +20,8 @@ const Icon = ({ name }: { name: string }) => {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 };
 
-const Button = ({ children = "Bestill demo", pale = false, metal = false, href = DEMO }: { children?: React.ReactNode; pale?: boolean; metal?: boolean; href?: string }) => (
-  metal ? <LiquidMetalButton href={href} label={String(children)} /> : <a href={href} className={pale ? styles.paleButton : styles.button}>{children}<Icon name="arrow" /></a>
-);
-
-const MiniTable = ({ compact = false }: { compact?: boolean }) => (
-  <div className={`${styles.miniTable} ${compact ? styles.compact : ""}`}>
-    <div className={styles.tableHead}><b>Pipeline</b><span>Se alle</span></div>
-    {[['Nordic Labs','Tilbud','84 000'],['Fjord Digital','Møte','42 500'],['Aker Studio','Vunnet','128 000'],['Oslo Tech','Lead','31 200']].slice(0, compact ? 3 : 4).map((r,i)=><div className={styles.tableRow} key={r[0]}><i className={styles.dot}>{r[0][0]}</i><b>{r[0]}</b><em className={i===2?styles.won:""}>{r[1]}</em><span>{r[2]}</span></div>)}
-  </div>
+const Button = ({ children = "Bestill demo", pale = false, href = DEMO }: { children?: React.ReactNode; pale?: boolean; href?: string }) => (
+  <a href={href} className={pale ? styles.paleButton : styles.button}>{children}<Icon name="arrow" /></a>
 );
 
 const plans = [
@@ -44,29 +34,21 @@ export default function Home() {
   return <main className={styles.page}>
     <SlideTabsNavigation />
 
-    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><h1><SlideUpText lines={[{ text: "Hele salgsarbeidet." }, { text: "Samlet på ett sted.", emphasized: true }]} /></h1><p>Samle pipeline, kunder, kontrakter og resultater i ett dashboard, bygget rundt teamet, prosessen og målene deres.</p><div className={styles.heroButtons}><Button metal/><a className={styles.learn} href="/referanser"><span className={styles.playIcon}>↗</span> Se kundecase</a></div></div><HeroDashboard /></section>
+    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><h1><SlideUpText lines={[{ text: "Se hva som må følges opp." }, { text: "Før salget stopper opp.", emphasized: true }]} /></h1><p>Clovo viser hvem som eier salget, hva neste aktivitet er og hva teamet ligger an til å lande. Alt i én arbeidsflate tilpasset måten dere faktisk jobber på.</p><div className={styles.heroButtons}><Button/><a className={styles.learn} href="#eksempler"><span className={styles.playIcon}>↗</span> Se dashboard-eksempler</a></div></div><HeroDashboard /></section>
 
-    <section className={styles.trusted}><p>Alt teamet trenger, samlet på ett sted</p><div className={styles.trustedViewport}><div className={styles.trustedTrack}>{[false,true].map(copy=><div className={styles.trustedGroup} aria-hidden={copy || undefined} key={String(copy)}><b>Pipeline</b><b>Kontrakter</b><b>Kundeoversikt</b><b>Analyse</b><b>Sanntidsdata</b></div>)}</div></div></section>
+    <section className={styles.productFlow} aria-label="Salgsflyten i Clovo"><span>Lead</span><Icon name="arrow"/><span>Møte</span><Icon name="arrow"/><span>Tilbud</span><Icon name="arrow"/><span>Signering</span><Icon name="arrow"/><strong>Resultat</strong></section>
 
     <Features />
 
     <DashboardExamples />
 
-    <section className={styles.section}><div className={styles.heading}><h2>Smarte funksjoner. Bedre salg.</h2><p>Følg aktivitet, fremdrift og resultater uten å miste oversikten.</p></div><div className={styles.smartGrid}><article className={styles.performance}><h3>Resultater i sanntid</h3><p>Se utvikling, måloppnåelse og nøkkeltall per selger.</p><div className={styles.metricRow}><div><small>Vunnet denne måneden</small><b>284 500 kr</b></div><div><small>Måloppnåelse</small><b>82%</b></div></div><div className={styles.lineChart}><AnimatedAreaChart /></div></article><article className={styles.community}><h3>Teamets arbeidsflate</h3><p>Roller og tilgang gir alle akkurat den oversikten de trenger.</p>{['Selger','Salgsleder','Daglig leder'].map((x,i)=><div className={styles.person} key={x}><i>{x[0]}</i><span><b>{x}</b><small>{i===0?'Egne kunder og salg':i===1?'Hele teamets pipeline':'Overordnet innsikt'}</small></span><em>•••</em></div>)}</article><article><h3>Pipeline-fremdrift</h3><p>Følg hvert salg fra første kontakt til signert avtale.</p><MiniTable compact/></article><article><h3>Kontrakter og signering</h3><p>Hold avtaler, dokumenter og neste steg samlet.</p><ContractSendDemo /></article><article className={styles.insight}><h3>Innsikt som kan brukes</h3><p>Se hva som driver salget og hvor prosessen stopper opp.</p><div className={styles.kpis}><b>15<small>aktive salg</small></b><b>20<small>oppgaver</small></b><b>82%<small>måloppnåelse</small></b></div></article></div><div className={styles.center}><Button metal/></div></section>
-
     <AfterBookingProcess />
-
-    <section className={styles.blueBand}><div><b>Én</b><span>samlet arbeidsflate</span></div><div><b>100%</b><span>tilpasset oppsett</span></div><div><b>24/7</b><span>tilgang til ferske data</span></div><div><b>Alle</b><span>roller i samme system</span></div></section>
 
     <TrustAndComparison />
 
     <section className={`${styles.section} ${styles.pricing}`} id="priser"><div className={styles.heading}><h2>Velg riktig nivå</h2><p>Start med standardoppsettet, eller velg en løsning tilpasset teamet.</p></div><div className={styles.plans}>{plans.map(p=><article key={p.name} className={p.hot?styles.hotPlan:""}>{p.hot&&<span className={styles.popular}>Mest valgt</span>}{p.badge&&<span className={styles.exclusive}>{p.badge}</span>}<h3>{p.name}</h3><p>{p.copy}</p><strong>{p.price}</strong><small>{p.suffix}</small><Button pale={!p.hot} href={`/demo?package=${encodeURIComponent(p.name)}`}>{p.badge?'Avtal en prat':'Bestill demo'}</Button><ul>{p.points.map(x=><li key={x}><Icon name="check"/>{x}</li>)}</ul></article>)}</div></section>
 
     <LandingFaq />
-
-    <FinalDecisionCta />
-
-    <section className={styles.subscribe} id="kontakt"><div><h2>Klar for bedre salgsflyt?</h2><p>Fortell oss om teamet, så viser vi hvordan Clovo kan bygges for dere.</p></div><form action={DEMO}><input type="email" name="email" placeholder="Skriv inn jobb-e-post" aria-label="Jobb-e-post"/><button>Bestill demo</button></form></section>
 
     <Footer />
   </main>;

@@ -173,3 +173,7 @@
     transition: none;
   }
 }
+
+/* Product UI stays framed. Supporting content is deliberately more open. */
+.intro{max-width:760px;text-align:left;margin-left:0}.intro h2{font-size:clamp(34px,4.6vw,58px);line-height:.98;letter-spacing:-.055em}.intro p{max-width:590px;margin-left:0;font-size:13px}.grid{gap:0;border-block:1px solid #e6ebe8}.card{border:0;border-radius:0;border-bottom:1px solid #e6ebe8;background:transparent;box-shadow:none}.card:nth-child(even){border-left:1px solid #e6ebe8}.dashboard{background:#f7faf8}.card:hover{box-shadow:none!important}.icon{border:0;background:#eef4f1;color:#ff5b35}.contractVisual,.isolationVisual span{background:#fff}
+@media(max-width:850px){.intro{text-align:left}.card:nth-child(even){border-left:0}.grid{border-bottom:0}.dashboard{border-radius:18px}.card{padding-inline:20px}}
