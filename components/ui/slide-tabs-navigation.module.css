@@ -23,3 +23,52 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Floating navigation treatment used by the new hero. */
+.header {
+  width: min(1240px, calc(100% - 48px));
+  margin: 18px auto 0;
+  padding: 7px 12px;
+  border: 1px solid rgb(34 72 59 / 13%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 14px 42px rgb(30 71 57 / 12%);
+}
+
+.nav {
+  height: 50px;
+}
+
+.tabs {
+  border-color: #e4eae7;
+  background: #f4f7f6;
+  box-shadow: none;
+}
+
+.tabs a {
+  color: #67736f;
+}
+
+.tabs .active,
+.tabs a:hover,
+.tabs a:focus-visible {
+  color: #17231f;
+}
+
+.pill {
+  border: 1px solid #e0e7e4;
+  box-shadow: 0 4px 12px rgb(26 67 53 / 9%);
+}
+
+@media (max-width: 920px) {
+  .header {
+    width: calc(100% - 24px);
+    margin-top: 12px;
+    padding: 6px 10px;
+    border-radius: 16px;
+  }
+
+  .mobileMenu {
+    top: 68px;
+  }
+}

@@ -5,7 +5,13 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, LoaderCircle } from "lucide-react";
 import styles from "./demo.module.css";
 
-export function DemoForm({ initialEmail }: { initialEmail: string }) {
+const packages = [
+  { name: "Den enkle", description: "Fast standardoppsett" },
+  { name: "Den fleksible", description: "Mindre tilpasninger" },
+  { name: "Den eksklusive", description: "Fullt skreddersydd" },
+];
+
+export function DemoForm({ initialEmail, initialPackage }: { initialEmail: string; initialPackage: string }) {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -82,6 +88,25 @@ export function DemoForm({ initialEmail }: { initialEmail: string }) {
           </select>
         </label>
       </div>
+
+      <fieldset>
+        <legend>Hvilken pakke er dere interessert i? *</legend>
+        <div className={styles.packageGrid}>
+          {packages.map(option => (
+            <label className={styles.packageOption} key={option.name}>
+              <input
+                type="radio"
+                name="package"
+                value={option.name}
+                required
+                defaultChecked={initialPackage.toLowerCase() === option.name.toLowerCase()}
+              />
+              <span><b>{option.name}</b><small>{option.description}</small></span>
+              <i aria-hidden="true" />
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <fieldset>
         <legend>Hvilke roller trenger oversikt? *</legend>

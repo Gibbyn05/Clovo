@@ -19,4 +19,92 @@
     padding-inline: 15px;
   }
 }
+
+.packageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.packageOption {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 86px;
+  padding: 14px 36px 14px 14px;
+  align-items: center;
+  border: 1px solid #e5e1df;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 150ms ease;
+}
+
+.packageOption:hover {
+  border-color: #ffc0b1;
+  transform: translateY(-1px);
+}
+
+.packageOption:has(input:checked) {
+  border-color: #ff7656;
+  background: #fff6f2;
+  box-shadow: 0 0 0 3px rgb(255 91 53 / 10%);
+}
+
+.packageOption input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.packageOption > span {
+  display: grid;
+  gap: 5px;
+}
+
+.packageOption b {
+  font-size: 13px;
+}
+
+.packageOption small {
+  color: #86868a;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.packageOption > i {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #c9c5c3;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.packageOption:has(input:checked) > i {
+  border: 5px solid #ff5b35;
+  background: #fff;
+}
+
+.packageOption:has(input:focus-visible) {
+  outline: 2px solid #ff8063;
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  .packageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .packageOption {
+    min-height: 70px;
+  }
+}
 .page{font-family:"Avenir Next",Avenir,ui-sans-serif,system-ui,sans-serif}.page a{color:inherit}

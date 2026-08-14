@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const requiredFields = ["name", "email", "company", "teamSize", "timeline", "roles", "salesProcess", "dashboardNeeds", "consent"] as const;
+const requiredFields = ["name", "email", "company", "teamSize", "timeline", "package", "roles", "salesProcess", "dashboardNeeds", "consent"] as const;
 
 function text(value: unknown, max = 3000) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
   const fields = [
     ["Navn", data.name], ["E-post", data.email], ["Telefon", data.phone || "Ikke oppgitt"],
-    ["Bedrift", data.company], ["Teamstørrelse", data.teamSize], ["Tidsplan", data.timeline],
+    ["Bedrift", data.company], ["Teamstørrelse", data.teamSize], ["Ønsket pakke", data.package], ["Tidsplan", data.timeline],
     ["Roller", data.roles || "Ikke oppgitt"], ["Dagens verktøy", data.currentTools || "Ikke oppgitt"],
     ["Salgsprosess", data.salesProcess], ["Behov i dashboardet", data.dashboardNeeds],
     ["Annet", data.notes || "Ikke oppgitt"],

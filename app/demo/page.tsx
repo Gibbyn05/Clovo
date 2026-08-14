@@ -12,7 +12,7 @@ export const metadata = {
 export default function DemoPage({
   searchParams,
 }: {
-  searchParams?: { email?: string };
+  searchParams?: { email?: string; package?: string };
 }) {
   return (
     <main className={styles.page}>
@@ -53,7 +53,7 @@ export default function DemoPage({
             <h2>Fortell oss om salgsteamet</h2>
             <p>Felter merket med * må fylles ut.</p>
           </div>
-          <DemoForm initialEmail={searchParams?.email ?? ""} />
+          <DemoForm initialEmail={searchParams?.email ?? ""} initialPackage={searchParams?.package ?? ""} />
         </section>
       </div>
     </main>

@@ -330,6 +330,356 @@
   }
 }
 
+/* Reference-led hero: mint grid, centered message and product-first preview. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: min(1440px, calc(100% - 32px));
+  min-height: 940px;
+  margin-top: 18px;
+  padding: 86px 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  overflow: hidden;
+  border: 1px solid #d9eee7;
+  border-radius: 32px;
+  background-color: #effbf7;
+  background-image:
+    linear-gradient(rgb(128 190 169 / 18%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(128 190 169 / 18%) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -20% -10% 10%;
+  background:
+    radial-gradient(circle at 18% 22%, rgb(255 255 255 / 96%), transparent 35%),
+    radial-gradient(circle at 84% 18%, rgb(170 255 218 / 68%), transparent 34%),
+    linear-gradient(180deg, transparent 48%, rgb(255 255 255 / 82%) 100%);
+  pointer-events: none;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  width: min(790px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 25px;
+  padding: 8px 13px;
+  border: 1px solid rgb(24 90 67 / 15%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 82%);
+  color: #315e4f;
+  box-shadow: 0 8px 24px rgb(38 94 74 / 8%);
+  font-size: 11px;
+  font-weight: 750;
+  backdrop-filter: blur(10px);
+}
+
+.heroBadge span {
+  color: #19a572;
+  font-size: 10px;
+  filter: drop-shadow(0 0 5px rgb(25 165 114 / 45%));
+}
+
+.hero h1 {
+  margin-bottom: 22px;
+  color: #17201d;
+  font-size: clamp(56px, 6.3vw, 86px);
+  line-height: .96;
+  letter-spacing: -.064em;
+}
+
+.hero h1 strong {
+  color: #52635d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -.055em;
+}
+
+.heroCopy > p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #5f716b;
+  font-size: 15px;
+}
+
+.heroButtons {
+  justify-content: center;
+  margin: 28px 0 0;
+}
+
+.heroButtons .learn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-color: rgb(35 70 58 / 18%);
+  background: rgb(255 255 255 / 72%);
+  backdrop-filter: blur(10px);
+}
+
+.playIcon {
+  display: grid;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  border-radius: 50%;
+  background: #163f31;
+  color: #fff;
+  font-size: 8px;
+  line-height: 1;
+}
+
+.heroVisual {
+  position: relative;
+  z-index: 2;
+  width: min(990px, calc(100% - 40px));
+  min-height: 500px;
+  margin: 0 auto -90px;
+  padding: 0 22px 90px;
+  border: 1px solid rgb(25 69 55 / 14%);
+  border-radius: 22px 22px 0 0;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 38px 90px rgb(34 88 69 / 18%);
+  backdrop-filter: blur(16px);
+}
+
+.visualTopbar {
+  height: 62px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #e8efec;
+  color: #66736e;
+  font-size: 10px;
+}
+
+.visualTopbar > div,
+.visualTopbar nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.visualTopbar nav {
+  padding: 4px;
+  border-radius: 8px;
+  background: #f3f7f5;
+}
+
+.visualTopbar nav span {
+  padding: 7px 10px;
+}
+
+.visualTopbar .visualActive {
+  border-radius: 6px;
+  background: #fff;
+  color: #1c2924;
+  box-shadow: 0 2px 8px rgb(29 68 54 / 9%);
+  font-weight: 750;
+}
+
+.visualTopbar em {
+  justify-self: end;
+  color: #159366;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.visualLogo {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 8px;
+  background: #ff5b35;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 850;
+  box-shadow: 0 7px 16px rgb(255 91 53 / 24%);
+}
+
+.visualIntro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 24px 2px 17px;
+}
+
+.visualIntro small,
+.visualIntro span {
+  color: #8b9792;
+  font-size: 9px;
+}
+
+.visualIntro h2 {
+  margin: 3px 0 0;
+  font-size: 22px;
+  letter-spacing: -.04em;
+}
+
+.visualIntro > span {
+  padding: 7px 10px;
+  border: 1px solid #e1ebe7;
+  border-radius: 999px;
+  background: #f8fbfa;
+}
+
+.heroMetrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.heroMetrics > div {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #e8efec;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #fff, #f8fcfa);
+}
+
+.heroMetrics small,
+.heroMetrics span {
+  display: block;
+  color: #8b9792;
+  font-size: 8px;
+}
+
+.heroMetrics b {
+  display: block;
+  margin: 5px 0 4px;
+  font-size: 18px;
+  letter-spacing: -.025em;
+}
+
+.heroMetrics span {
+  color: #25936c;
+}
+
+.heroVisual .miniTable {
+  border: 1px solid #e8efec;
+  box-shadow: none;
+}
+
+.heroVisual .floating {
+  left: auto;
+  right: -36px;
+  bottom: 68px;
+  border: 1px solid #e3ece8;
+  box-shadow: 0 22px 55px rgb(31 79 62 / 18%);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 880px;
+    padding: 72px 24px 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(50px, 9vw, 70px);
+  }
+
+  .heroVisual {
+    width: min(720px, calc(100% - 20px));
+  }
+
+  .heroVisual .floating {
+    right: 18px;
+    bottom: 72px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    width: calc(100% - 20px);
+    min-height: 780px;
+    margin-top: 10px;
+    padding: 50px 12px 0;
+    gap: 38px;
+    border-radius: 24px;
+    background-size: 34px 34px;
+  }
+
+  .heroBadge {
+    margin-bottom: 19px;
+    font-size: 10px;
+  }
+
+  .hero h1 {
+    font-size: clamp(39px, 12.5vw, 55px);
+    letter-spacing: -.058em;
+  }
+
+  .heroCopy > p {
+    max-width: 340px;
+    font-size: 13px;
+  }
+
+  .heroVisual {
+    width: 100%;
+    min-height: 410px;
+    margin-bottom: -60px;
+    padding: 0 10px 70px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .visualTopbar {
+    height: 52px;
+    grid-template-columns: 1fr auto;
+  }
+
+  .visualTopbar nav {
+    display: none;
+  }
+
+  .visualIntro {
+    padding: 17px 1px 13px;
+  }
+
+  .visualIntro h2 {
+    font-size: 18px;
+  }
+
+  .heroMetrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .heroMetrics > div {
+    padding: 11px;
+  }
+
+  .heroMetrics > div:last-child {
+    display: none;
+  }
+
+  .heroMetrics b {
+    font-size: 14px;
+  }
+
+  .heroVisual .floating {
+    left: 18px;
+    right: 18px;
+    bottom: 25px;
+  }
+}
+
 /* The final CTA must remain fully legible instead of inheriting a partial scroll-reveal state. */
 .subscribe,.subscribe>div,.subscribe form{animation:none;opacity:1;transform:none;clip-path:none}
 .subscribe{background:linear-gradient(110deg,#fff1ec,#ffe8e1);border:1px solid #ffd8cd;box-shadow:0 18px 50px rgba(91,38,22,.08)}
