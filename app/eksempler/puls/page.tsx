@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Activity, ArrowLeft, BellRing, Headphones, PhoneCall, Radio, Settings, Signal, UsersRound, Zap } from "lucide-react";
 import styles from "./puls.module.css";
+import { DashboardDemoInteractions } from "@/components/dashboard-demo-interactions";
 
 export const metadata = { title: "Puls | Clovo dashboardeksempel", description: "Et mørkt Clovo-dashboard for sanntidsaktivitet og telefonsalg." };
 
@@ -11,7 +12,7 @@ const agents = [
 
 export default function PulseDashboard() {
   return <main className={styles.page}>
-    <header><Link href="/" className={styles.logo}><span>C/</span>PULS</Link><nav><a className={styles.active}><Activity />LIVE</a><a><UsersRound />TEAM</a><a><Headphones />KØ</a></nav><div><i><Radio /> LIVE</i><button><BellRing /></button><button><Settings /></button><span>EKSEMPELDATA</span></div></header>
+    <header><Link href="/" className={styles.logo}><span>C/</span>PULS</Link><nav><a className={styles.active} aria-pressed="true" data-demo-tab-group="pulse-nav" data-demo-action="LIVE-visningen er valgt. Dataene oppdateres kun visuelt i demoen."><Activity />LIVE</a><a aria-pressed="false" data-demo-tab-group="pulse-nav" data-demo-action="TEAM-visningen er valgt. Eksempeldataene er skrivebeskyttet."><UsersRound />TEAM</a><a aria-pressed="false" data-demo-tab-group="pulse-nav" data-demo-action="KØ-visningen er valgt. Eksempeldataene er skrivebeskyttet."><Headphones />KØ</a></nav><div><i><Radio /> LIVE</i><button aria-label="Varsler" data-demo-action="Tre systemsignaler vises lenger ned på siden."><BellRing /></button><button aria-label="Innstillinger" data-demo-action="Skrivebeskyttet: innstillinger kan ikke endres i eksempelvisningen."><Settings /></button><span>EKSEMPELDATA</span></div></header>
 
     <section className={styles.command}>
       <div className={styles.title}><Link href="/"><ArrowLeft /> TILBAKE</Link><p>COMMAND CENTER / OSLO / 14:32:08</p><h1>SALGS<span>PULS</span></h1></div>
@@ -47,5 +48,6 @@ export default function PulseDashboard() {
     </section>
 
     <footer><span><i /> SYSTEM ONLINE</span><p>CLV-PULSE / REALTIME SALES OPERATIONS</p><span><PhoneCall /> 8 AKTIVE</span></footer>
+    <DashboardDemoInteractions theme="pulse" />
   </main>;
 }
