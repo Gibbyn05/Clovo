@@ -31,7 +31,7 @@ const defaultNavLinks = [
   { label: "Funksjoner", href: "#funksjoner" },
   { label: "Oppsett", href: "#oppsett" },
   { label: "Priser", href: "#priser" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 const defaultSocialLinks = [
@@ -143,7 +143,7 @@ export function Footer({
           >
             <p>© {new Date().getFullYear()} {brandName}. Alle rettigheter reservert.</p>
             <div className="flex gap-5">
-              <Link href="#kontakt" className="transition-colors hover:text-[#1b1b1d]">Kontakt</Link>
+              <Link href="/kontakt" className="transition-colors hover:text-[#1b1b1d]">Kontakt</Link>
               <Link href="/login" className="transition-colors hover:text-[#1b1b1d]">Logg inn</Link>
             </div>
           </div>

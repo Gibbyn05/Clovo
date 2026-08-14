@@ -12,7 +12,7 @@ const items = [
   { label: "Funksjoner", href: "#funksjoner" },
   { label: "Oppsett", href: "#oppsett" },
   { label: "Priser", href: "#priser" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 export function SlideTabsNavigation() {
