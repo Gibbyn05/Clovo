@@ -180,3 +180,27 @@
 
 .illustration{position:absolute;inset:92px 14px 10px;overflow:hidden}.illustration img{object-fit:cover;object-position:center}.illustrationContain img{object-fit:contain}.contractComposition{position:absolute;inset:86px 18px 14px}.contractComposition>.illustration{inset:0 0 48px;opacity:.42}.contractComposition .contractVisual{left:8px;right:8px;bottom:0;z-index:2;background:rgb(255 255 255 / 92%);backdrop-filter:blur(8px);box-shadow:0 14px 35px rgb(23 34 30 / 12%)}
 @media(max-width:850px){.illustration{inset:86px 8px 8px}.contractComposition{inset:82px 10px 10px}}
+
+
+/* Clearer feature messaging with enough space for every line of content. */
+.intro{max-width:820px;margin-bottom:58px}
+.intro h2{font-size:clamp(38px,4.8vw,62px);line-height:1.02}
+.intro p{max-width:720px;font-size:16px;line-height:1.7;color:#55585a}
+.card{min-height:330px;padding:30px}
+.cardHead{gap:16px}
+.icon{width:48px;height:48px;border-radius:12px}
+.icon svg{width:25px;height:25px}
+.card h3{margin:1px 0 9px;font-size:19px;line-height:1.35;letter-spacing:-.25px}
+.card p{max-width:460px;font-size:14.5px;line-height:1.65;color:#55585a}
+.dashboard{min-height:520px}
+.pipeline,.roles{min-height:330px}
+.contract,.insight,.isolation{min-height:340px}
+.dashboardVisual{inset:160px 30px 0}
+.illustration{inset:125px 18px 12px}
+.contractComposition{inset:122px 22px 16px}
+.metricTiles small{font-size:10.5px;color:#6d7072}
+.metricTiles b{font-size:22px}
+.contractVisual div{font-size:11px}
+.contractVisual button{min-height:40px;font-size:11px}
+@media(max-width:850px){.intro{margin-bottom:42px}.intro p{font-size:15px}.card{min-height:320px;padding:25px}.card h3{font-size:18px}.card p{font-size:14px}.dashboard{min-height:500px}.dashboardVisual{inset:158px 16px 0}.illustration{inset:120px 10px 10px}.contractComposition{inset:116px 12px 12px}}
+@media(max-width:600px){.intro h2{font-size:36px}.cardHead{gap:13px}.icon{width:44px;height:44px}.dashboard{min-height:470px}}
