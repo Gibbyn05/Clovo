@@ -75,27 +75,8 @@ function Visual({ kind }: { kind: string }) {
 }
 
 export function Features() {
-  const root = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (!root.current) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
-    }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    }, { threshold: 0.12 });
-    observer.observe(root.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={root} id="funksjoner" className={`${styles.section} ${visible ? styles.visible : ""}`}>
+    <section id="funksjoner" className={styles.section} data-reveal>
       <div className={styles.intro}>
         <h2>Arbeidsflaten følger salget, ikke omvendt.</h2>
         <p>Fra første kontakt til signert avtale ser teamet bare informasjonen som trengs for å ta neste steg.</p>

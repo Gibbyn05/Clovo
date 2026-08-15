@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail } from "lucide-react";
+import { EnvelopeSimple } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 interface FooterLink {
@@ -37,7 +37,7 @@ const defaultNavLinks = [
 
 const defaultSocialLinks = [
   {
-    icon: <Mail className="size-5" />,
+    icon: <EnvelopeSimple className="size-5" aria-hidden="true" />,
     href: "/demo",
     label: "Bestill demo av Clovo",
   },
@@ -51,35 +51,11 @@ export function Footer({
   brandIcon,
   className,
 }: FooterProps) {
-  const footerRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const element = footerRef.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12 },
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
-  const reveal = cn(
-    "translate-y-5 opacity-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
-    isVisible && "translate-y-0 opacity-100",
-  );
+  const reveal = "translate-y-0 opacity-100";
 
   return (
     <section
-      ref={footerRef}
+      data-reveal
       className={cn("relative mt-0 w-full overflow-hidden", className)}
     >
       <footer className="relative mt-20 overflow-hidden border-t border-[#e8e8e8] bg-[linear-gradient(180deg,#ffffff_0%,#fffaf8_100%)]">
@@ -105,7 +81,7 @@ export function Footer({
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="grid size-10 place-items-center rounded-full border border-[#e8e8e8] bg-white text-[#747477] transition-[color,border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#ffb8a7] hover:text-[#ff5b35] hover:shadow-[0_8px_24px_rgba(255,91,53,0.12)]"
+                      className="grid size-11 place-items-center rounded-full border border-[#e8e8e8] bg-white text-[#5f6064] transition-[color,border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#ffb8a7] hover:text-[#d94725] hover:shadow-[0_8px_24px_rgba(255,91,53,0.12)] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#ffb8a7]"
                       target={external ? "_blank" : undefined}
                       rel={external ? "noopener noreferrer" : undefined}
                     >
@@ -125,7 +101,7 @@ export function Footer({
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}
-                    className="relative transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[#ff5b35] after:transition-[width] after:duration-300 hover:text-[#1b1b1d] hover:after:w-full"
+                    className="relative flex min-h-11 items-center px-1 transition-colors duration-300 after:absolute after:bottom-1 after:left-0 after:h-px after:w-0 after:bg-[#ff5b35] after:transition-[width] after:duration-300 hover:text-[#1b1b1d] hover:after:w-full focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#ffb8a7]"
                     href={link.href}
                   >
                     {link.label}
@@ -144,8 +120,8 @@ export function Footer({
           >
             <p>© {new Date().getFullYear()} {brandName}. Alle rettigheter reservert.</p>
             <div className="flex gap-5">
-              <Link href="/kontakt" className="transition-colors hover:text-[#1b1b1d]">Kontakt</Link>
-              <Link href="/login" className="transition-colors hover:text-[#1b1b1d]">Logg inn</Link>
+              <Link href="/kontakt" className="flex min-h-11 items-center transition-colors hover:text-[#1b1b1d]">Kontakt</Link>
+              <Link href="/login" className="flex min-h-11 items-center transition-colors hover:text-[#1b1b1d]">Logg inn</Link>
             </div>
           </div>
         </div>
@@ -154,7 +130,7 @@ export function Footer({
           aria-hidden="true"
           className={cn(
             "pointer-events-none absolute bottom-36 left-1/2 max-w-[95vw] -translate-x-1/2 select-none bg-gradient-to-b from-[#ff5b35]/20 via-[#ff5b35]/8 to-transparent bg-clip-text px-4 text-center font-extrabold leading-none tracking-[-0.075em] text-transparent opacity-0 transition-opacity duration-1000 motion-reduce:opacity-100 motion-reduce:transition-none md:bottom-32",
-            isVisible && "opacity-100",
+            "opacity-100",
           )}
           style={{ fontSize: "clamp(4rem, 14vw, 11rem)", transitionDelay: "220ms" }}
         >
@@ -164,7 +140,7 @@ export function Footer({
         <div
           className={cn(
             "absolute bottom-24 left-1/2 z-30 flex -translate-x-1/2 translate-y-5 items-center justify-center rounded-3xl border-2 border-[#ffd8cf] bg-white/70 p-3 opacity-0 shadow-[0_14px_50px_rgba(72,31,20,0.16)] backdrop-blur-md transition-[opacity,transform,border-color] duration-700 hover:border-[#ff5b35] motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:bottom-20",
-            isVisible && "translate-y-0 opacity-100",
+            "translate-y-0 opacity-100",
           )}
           style={{ transitionDelay: "300ms" }}
         >

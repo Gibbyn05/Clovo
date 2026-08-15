@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Check, ClipboardCheck, Database, FileCheck2, LockKeyhole, MessagesSquare, Rocket, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, ClipboardText, Database, FileText, LockKey, ChatCircleDots, RocketLaunch, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 import styles from "./landing-decision-sections.module.css";
 import exampleStyles from "./dashboard-examples.module.css";
 
@@ -21,13 +21,13 @@ const faqs = [
 
 export function AfterBookingProcess() {
   const steps = [
-    { icon: ClipboardCheck, number: "01", title: "Send inn behovet", text: "Velg pakke og fortell oss om teamet, dagens arbeidsflyt og hva dere ønsker bedre oversikt over." },
-    { icon: MessagesSquare, number: "02", title: "Behovsmøte", text: "Dere velger et møtetidspunkt. Sammen avklarer vi mål, roller, data og hvilke deler av Clovo som er relevante." },
-    { icon: FileCheck2, number: "03", title: "Avklart oppsett", text: "Dere får et konkret omfang og en tidsplan før arbeidet starter. Ingen uklare leveranser eller skjulte antakelser." },
-    { icon: Rocket, number: "04", title: "Lansering", text: "Arbeidsflaten settes opp, kontrolleres og gjøres klar for teamet. Videre oppfølging følger valgt nivå." },
+    { icon: ClipboardText, number: "01", title: "Send inn behovet", text: "Velg pakke og fortell oss om teamet, dagens arbeidsflyt og hva dere ønsker bedre oversikt over." },
+    { icon: ChatCircleDots, number: "02", title: "Behovsmøte", text: "Dere velger et møtetidspunkt. Sammen avklarer vi mål, roller, data og hvilke deler av Clovo som er relevante." },
+    { icon: FileText, number: "03", title: "Avklart oppsett", text: "Dere får et konkret omfang og en tidsplan før arbeidet starter. Ingen uklare leveranser eller skjulte antakelser." },
+    { icon: RocketLaunch, number: "04", title: "Lansering", text: "Arbeidsflaten settes opp, kontrolleres og gjøres klar for teamet. Videre oppfølging følger valgt nivå." },
   ];
 
-  return <section className={styles.process} id="oppsett">
+  return <section className={styles.process} id="oppsett" data-reveal>
     <div className={styles.heading}><h2>Fra behov til en arbeidsflate teamet kan bruke.</h2><p>Dere vet hva som skal leveres, når det skal være klart og hva det vil kreve før arbeidet starter.</p></div>
     <div className={styles.processGrid}>{steps.map(step => { const StepIcon = step.icon; return <article key={step.number}><div className={styles.stepTop}><i><StepIcon /></i><span>{step.number}</span></div><h3>{step.title}</h3><p>{step.text}</p></article>; })}</div>
   </section>;
@@ -39,7 +39,7 @@ export function DashboardExamples() {
     { href: "/eksempler/nord", name: "Nord", type: "Rådgivende salg", metric: "84 / 100", label: "relasjonshelse", className: exampleStyles.exampleNord },
     { href: "/eksempler/puls", name: "Puls", type: "Telefonsalg og aktivitet", metric: "08 live", label: "aktive samtaler", className: exampleStyles.examplePulse },
   ];
-  return <section className={exampleStyles.examples} id="eksempler">
+  return <section className={exampleStyles.examples} id="eksempler" data-reveal>
     <div className={exampleStyles.examplesHeading}><div><h2>Tre salgsteam.<br />Tre forskjellige behov.</h2></div><p>Se hvordan struktur, nøkkeltall og prioriteringer endres mellom abonnementssalg, rådgivende salg og høy aktivitet. All informasjon er eksempeldata.</p></div>
     <div className={exampleStyles.exampleGrid}>{examples.map(example => <Link href={example.href} className={`${exampleStyles.exampleCard} ${example.className}`} key={example.href}><div className={exampleStyles.exampleTop}><span>{example.type}</span><ArrowRight /></div><div className={exampleStyles.exampleMock}><i /><i /><i /><b>{example.metric}</b><small>{example.label}</small><div><span /><span /><span /><span /><span /></div></div><footer><div><h3>{example.name}</h3></div><b>Utforsk <ArrowRight /></b></footer></Link>)}</div>
   </section>;
@@ -47,7 +47,7 @@ export function DashboardExamples() {
 
 export function TrustAndComparison() {
   return <>
-    <section className={styles.comparison}>
+    <section className={styles.comparison} data-reveal>
       <div className={styles.comparisonIntro}><h2>Mindre system.<br />Mer salgsflyt.</h2><p>Clovo er laget for team som vil følge opp salg, ikke administrere et omfattende standardsystem.</p><Link href="/referanser">Se vårt arbeid <ArrowRight /></Link></div>
       <div className={styles.comparisonTable} role="table" aria-label="Forskjellen mellom et standard CRM og Clovo">
         <div className={styles.tableHeader} role="row"><span role="columnheader">Område</span><b role="columnheader">Typisk standard-CRM</b><b role="columnheader">Clovo</b></div>
@@ -55,12 +55,12 @@ export function TrustAndComparison() {
       </div>
     </section>
 
-    <section className={styles.security}>
+    <section className={styles.security} data-reveal>
       <div className={styles.securityTitle}><h2>Før data flyttes, avklarer vi rammene.</h2><p>Databehov, tilgang, import og nødvendige avtaler avklares før en kundeløsning settes opp.</p></div>
       <div className={styles.securityGrid}>
-        <article><i><LockKeyhole /></i><div><h3>Kryptert forbindelse</h3><p>Produksjonssiden bruker HTTPS, slik at informasjon i skjemaer sendes over en kryptert forbindelse.</p></div></article>
+        <article><i><LockKey /></i><div><h3>Kryptert forbindelse</h3><p>Produksjonssiden bruker HTTPS, slik at informasjon i skjemaer sendes over en kryptert forbindelse.</p></div></article>
         <article><i><Database /></i><div><h3>Begrenset formål</h3><p>Opplysninger fra skjemaene brukes til å behandle henvendelsen og forberede videre oppfølging.</p></div></article>
-        <article><i><FileCheck2 /></i><div><h3>Avklares før oppstart</h3><p>Databehov, tilganger, import og nødvendige avtaler avklares før en kundeløsning settes opp.</p></div></article>
+        <article><i><FileText /></i><div><h3>Avklares før oppstart</h3><p>Databehov, tilganger, import og nødvendige avtaler avklares før en kundeløsning settes opp.</p></div></article>
         <article><i><ShieldCheck /></i><div><h3>Ingen kortdata</h3><p>Nettsiden ber ikke om eller lagrer betalingskortinformasjon i kontakt- eller demoflyten.</p></div></article>
       </div>
     </section>
@@ -68,7 +68,7 @@ export function TrustAndComparison() {
 }
 
 export function LandingFaq() {
-  return <section className={styles.faq}>
+  return <section className={styles.faq} data-reveal>
     <div className={styles.faqIntro}><h2>Det viktigste før dere går videre.</h2><p>Svar om oppsett, tilpasning, pris og hva som skjer etter henvendelsen.</p><Link href="/kontakt">Har du et annet spørsmål? <ArrowRight /></Link></div>
     <div className={styles.questions}>{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div>
   </section>;

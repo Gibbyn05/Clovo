@@ -72,3 +72,35 @@
     top: 68px;
   }
 }
+
+.menuButton {
+  min-width: 46px;
+  min-height: 46px;
+}
+
+.tabs a,
+.login {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.logo:focus-visible,
+.tabs a:focus-visible,
+.login:focus-visible,
+.menuButton:focus-visible,
+.mobileMenu a:focus-visible {
+  outline: 3px solid rgb(255 91 53 / 38%);
+  outline-offset: 3px;
+}
+
+@media (max-width: 920px) {
+  .mobileMenu[hidden] {
+    display: none;
+  }
+
+  .mobileMenu > a,
+  .mobileMenu > div a {
+    min-height: 48px;
+  }
+}

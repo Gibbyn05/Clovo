@@ -180,3 +180,7 @@
 
 .illustration{position:absolute;inset:92px 14px 10px;overflow:hidden}.illustration img{object-fit:cover;object-position:center}.illustrationContain img{object-fit:contain}.contractComposition{position:absolute;inset:86px 18px 14px}.contractComposition>.illustration{inset:0 0 48px;opacity:.42}.contractComposition .contractVisual{left:8px;right:8px;bottom:0;z-index:2;background:rgb(255 255 255 / 92%);backdrop-filter:blur(8px);box-shadow:0 14px 35px rgb(23 34 30 / 12%)}
 @media(max-width:850px){.illustration{inset:86px 8px 8px}.contractComposition{inset:82px 10px 10px}}
+
+/* Content remains available without JavaScript. Motion is progressively enhanced by GSAP. */
+.section{padding-block:76px}.intro{margin-bottom:40px;opacity:1;transform:none}.card{opacity:1;transform:none}.dashboardVisual{transform:none}.chartBars i{transform:scaleY(1)}.insightVisual path{stroke-dashoffset:0}.card p{font-size:12px;line-height:1.6}.contractVisual button{min-height:44px;font-size:12px}
+@media(max-width:600px){.section{padding-block:52px}.card p{font-size:12px}}

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, List, X } from "@phosphor-icons/react";
 import { LiquidMetalButton } from "./liquid-metal-button";
 import styles from "./slide-tabs-navigation.module.css";
 
@@ -97,11 +97,11 @@ export function SlideTabsNavigation() {
           aria-controls="mobile-navigation"
           aria-label={open ? "Lukk meny" : "Åpne meny"}
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X /> : <List />}
         </button>
       </nav>
 
-      <div id="mobile-navigation" className={`${styles.mobileMenu} ${open ? styles.mobileOpen : ""}`}>
+      <div id="mobile-navigation" hidden={!open} className={`${styles.mobileMenu} ${open ? styles.mobileOpen : ""}`}>
         {items.map((item, index) => <a key={item.label} href={item.href} onClick={() => select(index)}>{item.label}<span>0{index + 1}</span></a>)}
         <div><Link href="/login">Logg inn</Link><Link href="/demo">Bestill demo <ArrowRight /></Link></div>
       </div>

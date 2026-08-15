@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { BarChart3, Users } from "lucide-react";
+import { useRef, useState } from "react";
+import { ChartBar, UsersThree } from "@phosphor-icons/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import landingStyles from "@/app/landing.module.css";
 import styles from "./hero-dashboard.module.css";
 
@@ -45,18 +47,23 @@ function AnalysisPanel() {
   const bars = [38,52,44,68,61,82,76,96];
   return <>
     <div className={landingStyles.heroMetrics}><div><small>Vunnet denne måneden</small><b>284 500 kr</b><span>+18% mot forrige</span></div><div><small>Konverteringsrate</small><b>31%</b><span>+4 prosentpoeng</span></div><div><small>Snittverdi</small><b>67 200 kr</b><span>Stabil utvikling</span></div></div>
-    <div className={styles.analysisCard}><div className={styles.analysisHead}><div><BarChart3/><span><b>Salgsutvikling</b><small>Siste 8 uker</small></span></div><em>+18,4%</em></div><div className={styles.analysisBars}>{bars.map((height,index)=><i key={index} style={{height:`${height}%`,"--bar-index":index} as React.CSSProperties}/>)}</div><div className={styles.analysisAxis}><span>Uke 1</span><span>Uke 4</span><span>Uke 8</span></div></div>
+    <div className={styles.analysisCard}><div className={styles.analysisHead}><div><ChartBar/><span><b>Salgsutvikling</b><small>Siste 8 uker</small></span></div><em>+18,4%</em></div><div className={styles.analysisBars}>{bars.map((height,index)=><i key={index} style={{height:`${height}%`,"--bar-index":index} as React.CSSProperties}/>)}</div><div className={styles.analysisAxis}><span>Uke 1</span><span>Uke 4</span><span>Uke 8</span></div></div>
   </>;
 }
 
 export function HeroDashboard() {
   const [activeTab, setActiveTab] = useState<DashboardTab>("pipeline");
+  const panelRef = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    if (!panelRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.from(panelRef.current, { autoAlpha: 0, y: 8, duration: 0.28, ease: "power1.out" });
+  }, { dependencies: [activeTab] });
   const activeLabel = tabs.find(tab => tab.id === activeTab)?.label ?? "Pipeline";
 
-  return <div className={landingStyles.heroVisual}>
+  return <div className={landingStyles.heroVisual} data-hero-dashboard>
     <div className={landingStyles.visualTopbar}><div><span className={landingStyles.visualLogo}>C</span><b>Clovo</b></div><div className={styles.tabs} role="tablist" aria-label="Dashboardvisning">{tabs.map(tab=><button key={tab.id} type="button" role="tab" aria-selected={activeTab===tab.id} aria-controls={`hero-panel-${tab.id}`} className={activeTab===tab.id?styles.active:""} onClick={()=>setActiveTab(tab.id)}>{tab.label}</button>)}</div><em>Live oversikt</em></div>
-    <div className={landingStyles.visualIntro}><div><small>God morgen</small><h2>{activeLabel}</h2></div><span>{activeTab === "pipeline" ? "Oppdatert nå" : activeTab === "customers" ? <><Users/> 46 kunder</> : "Siste 8 uker"}</span></div>
-    <div key={activeTab} id={`hero-panel-${activeTab}`} role="tabpanel" className={styles.panel}>{activeTab === "pipeline" ? <PipelinePanel/> : activeTab === "customers" ? <CustomersPanel/> : <AnalysisPanel/>}</div>
+    <div className={landingStyles.visualIntro}><div><small>God morgen</small><h2>{activeLabel}</h2></div><span>{activeTab === "pipeline" ? "Oppdatert nå" : activeTab === "customers" ? <><UsersThree/> 46 kunder</> : "Siste 8 uker"}</span></div>
+    <div ref={panelRef} key={activeTab} id={`hero-panel-${activeTab}`} role="tabpanel" className={styles.panel}>{activeTab === "pipeline" ? <PipelinePanel/> : activeTab === "customers" ? <CustomersPanel/> : <AnalysisPanel/>}</div>
     <div className={landingStyles.floating}><small>{activeTab === "pipeline" ? "Prognose denne måneden" : activeTab === "customers" ? "Kunder med aktivitet" : "Utvikling mot mål"}</small><b>{activeTab === "pipeline" ? "1 240 000 kr" : activeTab === "customers" ? "38 av 46" : "+18,4%"}</b><div><span>{activeTab === "pipeline" ? "Basert på pipeline" : activeTab === "customers" ? "Siste 30 dager" : "Sammenlignet med sist"}</span><span className={landingStyles.orange}>{activeTab === "customers" ? "83%" : "+18%"}</span></div></div>
   </div>;
 }
