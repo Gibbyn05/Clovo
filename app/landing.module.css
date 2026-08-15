@@ -678,3 +678,24 @@
 .plans li{align-items:flex-start;gap:9px;margin:10px 0;font-size:12.5px;line-height:1.5;color:#4f4f53}
 .plans li svg{flex:0 0 14px;width:14px;height:14px;margin-top:2px}
 .popular,.exclusive{padding:5px 10px;font-size:9px}
+
+
+/* Vertical scroll position indicator: reads as navigation, not page loading. */
+.page::before{top:50%;right:14px;bottom:auto;left:auto;width:4px;height:112px;border-radius:999px;background:rgba(27,27,29,.12);box-shadow:none;transform:translateY(-50%);animation:none}
+.page::after{content:"";position:fixed;z-index:101;top:calc(50% - 56px);right:14px;width:4px;height:112px;border-radius:999px;background:var(--orange);transform:scaleY(0);transform-origin:top;pointer-events:none;animation:scrollPosition linear both;animation-timeline:scroll(root block)}
+@keyframes scrollPosition{to{transform:scaleY(1)}}
+@media(max-width:800px){.page::before{right:7px;height:80px}.page::after{right:7px;top:calc(50% - 40px);height:80px}}
+@media(prefers-reduced-motion:reduce){.page::after{animation:none;transform:scaleY(.35)}}
+
+
+/* Larger, clearer pricing typography with generous spacing. */
+.plans article{padding:30px}
+.plans h3{font-size:18px;line-height:1.35;margin:0 0 12px}
+.plans p{min-height:72px;font-size:14px;line-height:1.65;color:#4f4f53}
+.plans>article>strong{font-size:27px;margin-top:20px;line-height:1.25}
+.plans>article>small{font-size:13.5px;line-height:1.5;color:#5c5c60}
+.plans .button,.plans .paleButton{margin:26px 0;font-size:14px;padding:14px 20px}
+.plans ul{gap:4px}
+.plans li{gap:10px;margin:11px 0;font-size:14px;line-height:1.55;color:#434347}
+.plans li svg{flex-basis:15px;width:15px;height:15px;margin-top:3px}
+@media(max-width:800px){.plans article{padding:26px}.plans p{min-height:auto}}
