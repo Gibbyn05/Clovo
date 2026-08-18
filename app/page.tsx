@@ -34,7 +34,7 @@ export default function Home() {
   return <main className={styles.page}>
     <SlideTabsNavigation />
 
-    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><h1><SlideUpText lines={[{ text: "Se hva som må følges opp." }, { text: "Før salget stopper opp.", emphasized: true }]} /></h1><p>Clovo viser hvem som eier salget, hva neste aktivitet er og hva teamet ligger an til å lande. Alt i én arbeidsflate tilpasset måten dere faktisk jobber på.</p><div className={styles.heroButtons}><Button/><a className={styles.learn} href="#eksempler"><span className={styles.playIcon}>↗</span> Se dashboard-eksempler</a></div></div><HeroDashboard /></section>
+    <section className={styles.hero} id="hjem"><div className={styles.heroCopy}><h1><SlideUpText lines={[{ text: "Følg opp salget." }, { text: "Før salget stopper opp.", emphasized: true }]} /></h1><p>Clovo viser hvem som eier salget, hva neste aktivitet er og hva teamet ligger an til å lande. Alt i én arbeidsflate tilpasset måten dere faktisk jobber på.</p><div className={styles.heroButtons}><Button/><a className={styles.learn} href="#eksempler"><span className={styles.playIcon}>↗</span> Se dashboard-eksempler</a></div></div><HeroDashboard /></section>
 
     <section className={styles.productFlow} aria-label="Salgsflyten i Clovo"><span>Lead</span><Icon name="arrow"/><span>Møte</span><Icon name="arrow"/><span>Tilbud</span><Icon name="arrow"/><span>Signering</span><Icon name="arrow"/><strong>Resultat</strong></section>
 
